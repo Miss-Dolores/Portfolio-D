@@ -7,21 +7,20 @@ const badges = [
 ]
 
 export default function Hero({ onContactClick }) {
-  const line1Ref    = useRef(null)
-  const line2Ref    = useRef(null)
+  const line1Ref     = useRef(null)
+  const line2Ref     = useRef(null)
   const containerRef = useRef(null)
   const [revealed, setRevealed] = useState(false)
-  const [hovered, setHovered]   = useState(false)
+  const [hovered,  setHovered]  = useState(false)
 
-  /* ── fit text to container width ── */
   useEffect(() => {
     const measureText = (text, fontFamily, fontWeight, letterSpacing, fontSize) => {
       const span = document.createElement('span')
       span.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;top:0;left:-9999px;'
-      span.style.fontFamily = fontFamily
-      span.style.fontWeight = fontWeight
+      span.style.fontFamily    = fontFamily
+      span.style.fontWeight    = fontWeight
       span.style.letterSpacing = letterSpacing
-      span.style.fontSize = fontSize + 'px'
+      span.style.fontSize      = fontSize + 'px'
       span.textContent = text
       document.body.appendChild(span)
       const w = span.getBoundingClientRect().width
@@ -29,26 +28,26 @@ export default function Hero({ onContactClick }) {
       return w
     }
 
-    const fitLine = (el, maxWidth) => {
+    const fitLine = (el, maxWidth, capPx) => {
       if (!el || maxWidth <= 0) return
-      const cs = getComputedStyle(el)
-      const w100 = measureText(
-        el.textContent.trim(),
-        cs.fontFamily,
-        cs.fontWeight,
-        cs.letterSpacing,
-        100
-      )
+      const cs   = getComputedStyle(el)
+      const w100 = measureText(el.textContent.trim(), cs.fontFamily, cs.fontWeight, cs.letterSpacing, 100)
       if (w100 === 0) return
-      const targetPx = (100 * maxWidth) / w100
-      el.style.fontSize = Math.min(targetPx, 300) + 'px'
+      el.style.fontSize = Math.min((100 * maxWidth) / w100, capPx) + 'px'
     }
 
     const fit = () => {
       if (!containerRef.current) return
-      const maxW = containerRef.current.clientWidth - 96 // 48px padding × 2
-      fitLine(line1Ref.current, maxW)
-      fitLine(line2Ref.current, maxW)
+      const vw       = window.innerWidth
+      const isMobile = vw < 640
+      const isTablet = vw >= 640 && vw < 1024
+      // laptop/desktop: scale to 70% width, capped at 160px
+      const scale = isMobile ? 0.42 : isTablet ? 0.65 : 0.70
+      const cap   = isMobile ? 70   : isTablet ? 130  : 160
+      const hPad  = isMobile ? 48   : 96
+      const maxW  = (containerRef.current.clientWidth - hPad) * scale
+      fitLine(line1Ref.current, maxW, cap)
+      fitLine(line2Ref.current, maxW, cap)
     }
 
     document.fonts.ready.then(() => {
@@ -60,39 +59,27 @@ export default function Hero({ onContactClick }) {
     return () => window.removeEventListener('resize', fit)
   }, [])
 
-  const nameColor = hovered ? '#22c55e' : '#0a0a0a'
+  const nameColor = hovered ? '#22c55e' : '#ffffff'
 
   return (
     <section
       id="hero"
-      style={{
-        background: '#F5F0E8',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
+      style={{ background: '#000000', position: 'relative', overflow: 'hidden' }}
     >
-      {/* ── main content ── */}
       <div
         ref={containerRef}
-        style={{
-          padding: '108px 48px 56px',
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          boxSizing: 'border-box',
-        }}
+        className="hero-container"
+        style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}
       >
         {/* role label */}
-        <div
-          style={{
-            fontFamily: 'var(--font-space)',
-            fontSize: '0.72rem',
-            letterSpacing: '0.2em',
-            color: '#888',
-            textTransform: 'uppercase',
-            marginBottom: '28px',
-          }}
-        >
+        <div style={{
+          fontFamily: 'var(--font-space)',
+          fontSize: '0.72rem',
+          letterSpacing: '0.2em',
+          color: '#22c55e',
+          textTransform: 'uppercase',
+          marginBottom: '28px',
+        }}>
           Développeur Web Full-Stack
         </div>
 
@@ -109,7 +96,7 @@ export default function Hero({ onContactClick }) {
               style={{
                 fontFamily: 'var(--font-jevena)',
                 fontWeight: 700,
-                lineHeight: 0.88,
+                lineHeight: 0.95,
                 whiteSpace: 'nowrap',
                 color: nameColor,
                 letterSpacing: '-0.02em',
@@ -127,7 +114,7 @@ export default function Hero({ onContactClick }) {
               style={{
                 fontFamily: 'var(--font-jevena)',
                 fontWeight: 700,
-                lineHeight: 0.88,
+                lineHeight: 0.95,
                 whiteSpace: 'nowrap',
                 color: nameColor,
                 letterSpacing: '-0.02em',
@@ -141,22 +128,19 @@ export default function Hero({ onContactClick }) {
         </div>
 
         {/* bottom row */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            paddingTop: '44px',
-            flexWrap: 'wrap',
-            gap: '24px',
-          }}
-        >
-          {/* subtitle */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          paddingTop: '44px',
+          flexWrap: 'wrap',
+          gap: '24px',
+        }}>
           <p
             className={`hero-subtitle${revealed ? ' revealed' : ''}`}
             style={{
               fontFamily: 'var(--font-space)',
-              color: '#333',
+              color: 'rgba(255,255,255,0.55)',
               maxWidth: '380px',
               fontSize: '0.88rem',
               lineHeight: 1.7,
@@ -166,15 +150,9 @@ export default function Hero({ onContactClick }) {
             Je crée des interfaces modernes, fluides et centrées sur l'expérience utilisateur.
           </p>
 
-          {/* badge pills */}
           <div
             className={`hero-badges${revealed ? ' revealed' : ''}`}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '10px',
-              alignItems: 'flex-end',
-            }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-end' }}
           >
             {badges.map(({ dot, label }) => (
               <div
@@ -184,19 +162,19 @@ export default function Hero({ onContactClick }) {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
-                  border: '1px solid #0a0a0a',
+                  border: '1px solid rgba(255,255,255,0.2)',
                   padding: '8px 20px',
                   borderRadius: '999px',
                   fontSize: '0.68rem',
                   letterSpacing: '0.13em',
-                  color: '#0a0a0a',
+                  color: '#ffffff',
                   fontFamily: 'var(--font-space)',
                   background: 'transparent',
                   cursor: dot ? 'pointer' : 'default',
-                  transition: 'background 0.2s ease',
+                  transition: 'border-color 0.2s ease, background 0.2s ease',
                 }}
-                onMouseEnter={(e) => { if (dot) e.currentTarget.style.background = 'rgba(34,197,94,0.08)' }}
-                onMouseLeave={(e) => { if (dot) e.currentTarget.style.background = 'transparent' }}
+                onMouseEnter={(e) => { if (dot) { e.currentTarget.style.background = 'rgba(34,197,94,0.08)'; e.currentTarget.style.borderColor = '#22c55e' } }}
+                onMouseLeave={(e) => { if (dot) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)' } }}
               >
                 {dot && (
                   <span
@@ -218,7 +196,7 @@ export default function Hero({ onContactClick }) {
         </div>
       </div>
 
-      {/* ── SCROLL indicator (right edge) ── */}
+      {/* SCROLL indicator */}
       <div
         className={`hero-scroll${revealed ? ' revealed' : ''}`}
         style={{
@@ -231,34 +209,19 @@ export default function Hero({ onContactClick }) {
           gap: '10px',
         }}
       >
-        <span
-          style={{
-            fontFamily: 'var(--font-space)',
-            fontSize: '9px',
-            letterSpacing: '0.35em',
-            color: '#888',
-            textTransform: 'uppercase',
-            writingMode: 'vertical-rl',
-            transform: 'rotate(180deg)',
-          }}
-        >
+        <span style={{
+          fontFamily: 'var(--font-space)',
+          fontSize: '9px',
+          letterSpacing: '0.35em',
+          color: 'rgba(255,255,255,0.3)',
+          textTransform: 'uppercase',
+          writingMode: 'vertical-rl',
+          transform: 'rotate(180deg)',
+        }}>
           Scroll
         </span>
         <div className="scroll-line" />
       </div>
-
-      {/* ── bottom gradient fade to dark ── */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '120px',
-          background: 'linear-gradient(to bottom, transparent, #0a0f0a)',
-          pointerEvents: 'none',
-        }}
-      />
     </section>
   )
 }

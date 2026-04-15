@@ -58,7 +58,7 @@ function MarqueeRow({ skills, direction = 'left', speed = '35s' }) {
 
 export default function Skills() {
   return (
-    <section id="skills" style={{ background: '#0a0f0a', padding: '100px 0' }}>
+    <section id="skills" style={{ background: '#000000', padding: '100px 0' }}>
 
       {/* header */}
       <div style={{ padding: '0 48px', maxWidth: '1100px', margin: '0 auto' }}>
@@ -86,7 +86,7 @@ export default function Skills() {
             </span>
             <h2 style={{
               fontFamily: 'var(--font-jevena)',
-              color: '#e8e4dc',
+              color: '#ffffff',
               fontSize: 'clamp(2.4rem, 5vw, 4rem)',
               fontWeight: 700,
               lineHeight: 0.95,

@@ -54,134 +54,122 @@ function ProjectRow({ project, delay }) {
   return (
     <div
       ref={ref}
-      className="reveal-item"
+      className="reveal-item project-row-wrap"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        display: 'grid',
-        gridTemplateColumns: '56px 1fr auto',
-        gap: '40px',
         padding: '40px 0',
         borderTop: '1px solid rgba(255,255,255,0.07)',
-        alignItems: 'start',
         cursor: 'pointer',
         transition: 'opacity 0.3s',
       }}
     >
-      {/* number */}
-      <span style={{
-        fontFamily: 'var(--font-space)',
-        fontSize: '0.68rem',
-        color: hovered ? '#22c55e' : '#333',
-        letterSpacing: '0.12em',
-        paddingTop: '8px',
-        transition: 'color 0.3s',
-      }}>
-        {project.num}
-      </span>
-
-      {/* main content */}
-      <div>
-        <div style={{
-          display: 'flex',
-          alignItems: 'baseline',
-          gap: '20px',
-          marginBottom: '16px',
-          flexWrap: 'wrap',
-        }}>
-          <h3 style={{
-            fontFamily: 'var(--font-jevena)',
-            color: hovered ? '#22c55e' : '#e8e4dc',
-            fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
-            fontWeight: 700,
-            letterSpacing: '-0.02em',
-            lineHeight: 1,
-            transition: 'color 0.35s ease',
-          }}>
-            {project.title}
-          </h3>
-          <span style={{
-            fontFamily: 'var(--font-space)',
-            fontSize: '0.68rem',
-            color: '#333',
-            letterSpacing: '0.1em',
-          }}>
-            {project.year}
-          </span>
-        </div>
-
-        <p style={{
+      <div className="project-row-inner">
+        {/* number */}
+        <span style={{
           fontFamily: 'var(--font-space)',
-          color: '#666',
-          fontSize: '0.88rem',
-          lineHeight: 1.7,
-          maxWidth: '520px',
-          marginBottom: '20px',
+          fontSize: '0.68rem',
+          color: hovered ? '#22c55e' : 'rgba(255,255,255,0.3)',
+          letterSpacing: '0.12em',
+          paddingTop: '8px',
+          transition: 'color 0.3s',
+          flexShrink: 0,
         }}>
-          {project.description}
-        </p>
+          {project.num}
+        </span>
 
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          {project.tags.map(tag => (
-            <span key={tag} style={{
-              fontFamily: 'var(--font-space)',
-              fontSize: '0.65rem',
-              color: '#444',
-              border: '1px solid rgba(255,255,255,0.07)',
-              padding: '4px 12px',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
+        {/* main content */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '20px', marginBottom: '16px', flexWrap: 'wrap' }}>
+            <h3 style={{
+              fontFamily: 'var(--font-jevena)',
+              color: hovered ? '#22c55e' : '#ffffff',
+              fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
+              fontWeight: 700,
+              letterSpacing: '-0.02em',
+              lineHeight: 1,
+              transition: 'color 0.35s ease',
             }}>
-              {tag}
+              {project.title}
+            </h3>
+            <span style={{
+              fontFamily: 'var(--font-space)',
+              fontSize: '0.68rem',
+              color: 'rgba(255,255,255,0.25)',
+              letterSpacing: '0.1em',
+            }}>
+              {project.year}
             </span>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* links */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-        alignItems: 'flex-end',
-        paddingTop: '4px',
-      }}>
-        <a
-          href={project.live}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
+          <p style={{
             fontFamily: 'var(--font-space)',
-            fontSize: '0.72rem',
-            letterSpacing: '0.12em',
-            color: hovered ? '#22c55e' : '#555',
-            textDecoration: 'none',
-            transition: 'color 0.3s',
-            textTransform: 'uppercase',
-          }}
-        >
-          Live <ArrowUpRight size={13} />
-        </a>
-        <a
-          href={project.github}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontFamily: 'var(--font-space)',
-            fontSize: '0.72rem',
-            letterSpacing: '0.12em',
-            color: '#333',
-            textDecoration: 'none',
-            transition: 'color 0.3s',
-            textTransform: 'uppercase',
-          }}
-          onMouseEnter={e => e.currentTarget.style.color = '#888'}
-          onMouseLeave={e => e.currentTarget.style.color = '#333'}
-        >
-          Code <GitFork size={13} />
-        </a>
+            color: 'rgba(255,255,255,0.45)',
+            fontSize: '0.88rem',
+            lineHeight: 1.7,
+            maxWidth: '520px',
+            marginBottom: '20px',
+          }}>
+            {project.description}
+          </p>
+
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {project.tags.map(tag => (
+              <span key={tag} style={{
+                fontFamily: 'var(--font-space)',
+                fontSize: '0.65rem',
+                color: 'rgba(255,255,255,0.4)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                padding: '4px 12px',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                borderRadius: '4px',
+              }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* links */}
+        <div className="project-links">
+          <a
+            href={project.live}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontFamily: 'var(--font-space)',
+              fontSize: '0.72rem',
+              letterSpacing: '0.12em',
+              color: hovered ? '#22c55e' : 'rgba(255,255,255,0.4)',
+              textDecoration: 'none',
+              transition: 'color 0.3s',
+              textTransform: 'uppercase',
+            }}
+          >
+            Live <ArrowUpRight size={13} />
+          </a>
+          <a
+            href={project.github}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontFamily: 'var(--font-space)',
+              fontSize: '0.72rem',
+              letterSpacing: '0.12em',
+              color: 'rgba(255,255,255,0.25)',
+              textDecoration: 'none',
+              transition: 'color 0.3s',
+              textTransform: 'uppercase',
+            }}
+            onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.25)'}
+          >
+            Code <GitFork size={13} />
+          </a>
+        </div>
       </div>
     </div>
   )
@@ -189,7 +177,7 @@ function ProjectRow({ project, delay }) {
 
 export default function Projects() {
   return (
-    <section id="projects" style={{ background: '#0a0f0a', padding: '100px 48px' }}>
+    <section id="projects" style={{ background: '#000000', padding: '100px 48px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* header */}
@@ -217,7 +205,7 @@ export default function Projects() {
             </span>
             <h2 style={{
               fontFamily: 'var(--font-jevena)',
-              color: '#e8e4dc',
+              color: '#ffffff',
               fontSize: 'clamp(2.4rem, 5vw, 4rem)',
               fontWeight: 700,
               lineHeight: 0.95,
@@ -228,7 +216,7 @@ export default function Projects() {
           </div>
           <p style={{
             fontFamily: 'var(--font-space)',
-            color: '#444',
+            color: 'rgba(255,255,255,0.25)',
             fontSize: '0.8rem',
             letterSpacing: '0.05em',
           }}>

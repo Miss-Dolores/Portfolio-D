@@ -37,7 +37,7 @@ function RevealItem({ children, delay = 0 }) {
 
 export default function About() {
   return (
-    <section id="about" style={{ background: '#0a0f0a', padding: '100px 48px' }}>
+    <section id="about" style={{ background: '#000000', padding: '100px 48px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* header row */}
@@ -65,7 +65,7 @@ export default function About() {
             </span>
             <h2 style={{
               fontFamily: 'var(--font-jevena)',
-              color: '#e8e4dc',
+              color: '#ffffff',
               fontSize: 'clamp(2.4rem, 5vw, 4rem)',
               fontWeight: 700,
               lineHeight: 0.95,
@@ -150,7 +150,7 @@ export default function About() {
                   </span>
                   <h3 style={{
                     fontFamily: 'var(--font-jevena)',
-                    color: '#e8e4dc',
+                    color: '#ffffff',
                     fontSize: '1.4rem',
                     fontWeight: 700,
                     letterSpacing: '-0.01em',

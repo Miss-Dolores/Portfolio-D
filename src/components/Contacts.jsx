@@ -12,7 +12,7 @@ const inputBase = {
   background: 'transparent',
   border: 'none',
   borderBottom: '1px solid rgba(255,255,255,0.12)',
-  color: '#e8e4dc',
+  color: '#ffffff',
   fontFamily: 'var(--font-space)',
   fontSize: '0.95rem',
   outline: 'none',
@@ -41,7 +41,7 @@ export default function Contacts() {
   })
 
   return (
-    <section id="contacts" style={{ background: '#0a0f0a', padding: '100px 48px 80px' }}>
+    <section id="contacts" style={{ background: '#000000', padding: '100px 48px 80px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* header */}
@@ -69,7 +69,7 @@ export default function Contacts() {
             </span>
             <h2 style={{
               fontFamily: 'var(--font-jevena)',
-              color: '#e8e4dc',
+              color: '#ffffff',
               fontSize: 'clamp(2.4rem, 5vw, 4rem)',
               fontWeight: 700,
               lineHeight: 0.95,
@@ -120,7 +120,7 @@ export default function Contacts() {
                 gap: '8px',
                 fontFamily: 'var(--font-jevena)',
                 fontSize: '1.1rem',
-                color: '#e8e4dc',
+                color: '#ffffff',
                 textDecoration: 'none',
                 borderBottom: '1px solid rgba(255,255,255,0.15)',
                 paddingBottom: '4px',
