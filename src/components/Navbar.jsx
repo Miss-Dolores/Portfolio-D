@@ -173,6 +173,31 @@ export default function Navbar({ onNavClick, activeSection }) {
               )
             })}
           </ul>
+
+          {/* Mobile CTA */}
+          <button
+            onClick={() => handleClick('#contacts')}
+            style={{
+              marginTop: '20px',
+              width: '100%',
+              fontFamily: 'var(--font-space)',
+              fontSize: '0.8rem',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: '#000',
+              background: '#22c55e',
+              border: 'none',
+              borderRadius: '999px',
+              padding: '14px 24px',
+              cursor: 'pointer',
+              fontWeight: 600,
+              transition: 'opacity 0.2s ease',
+            }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+          >
+            Contactez-moi
+          </button>
         </div>
       )}
     </nav>

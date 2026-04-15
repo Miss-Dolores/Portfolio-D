@@ -95,17 +95,39 @@ export default function About() {
           }}
           className="about-grid"
           >
-            <p style={{
-              fontFamily: 'var(--font-space)',
-              color: '#888',
-              fontSize: '0.82rem',
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              lineHeight: 1.6,
-              paddingTop: '6px',
-            }}>
-              Développeur Web<br />Full-Stack
-            </p>
+            <div style={{ position: 'relative' }}>
+              <img
+                src="/dolores.png"
+                alt="Dolores Vlafonou"
+                style={{
+                  width: '100%',
+                  maxWidth: '260px',
+                  aspectRatio: '3/4',
+                  objectFit: 'cover',
+                  objectPosition: 'top center',
+                  borderRadius: '12px',
+                  display: 'block',
+                  filter: 'grayscale(20%)',
+                }}
+              />
+              <div style={{
+                position: 'absolute',
+                bottom: '12px',
+                left: '12px',
+                background: 'rgba(0,0,0,0.7)',
+                backdropFilter: 'blur(6px)',
+                border: '1px solid rgba(34,197,94,0.3)',
+                borderRadius: '6px',
+                padding: '6px 12px',
+                fontFamily: 'var(--font-space)',
+                fontSize: '0.62rem',
+                letterSpacing: '0.15em',
+                color: '#22c55e',
+                textTransform: 'uppercase',
+              }}>
+                Full-Stack Dev
+              </div>
+            </div>
             <p style={{
               fontFamily: 'var(--font-space)',
               color: '#b0aca6',
