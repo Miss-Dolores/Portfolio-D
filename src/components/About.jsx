@@ -37,7 +37,7 @@ function RevealItem({ children, delay = 0 }) {
 
 export default function About() {
   return (
-    <section id="about" style={{ background: '#0a0f0a', padding: '100px 48px' }}>
+    <section id="about" style={{ background: '#000000', padding: '100px 48px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* header row */}

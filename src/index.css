@@ -22,8 +22,8 @@ html {
 }
 
 body {
-  background-color: #0a0f0a;
-  color: #f0f5f0;
+  background-color: #000000;
+  color: #ffffff;
   font-family: 'Space Grotesk', sans-serif;
 }
 
@@ -69,6 +69,7 @@ body {
 
 .hero-name-mask {
   overflow: hidden;
+  padding-top: 0.12em;
 }
 
 .hero-name-line {
@@ -240,6 +241,24 @@ body {
   color: #e8e4dc !important;
 }
 
+/* ── Project rows ────────────────────────────────── */
+
+.project-row-top {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 32px;
+  align-items: start;
+}
+
+.project-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
 /* ── Responsive grids ────────────────────────────── */
 @media (max-width: 768px) {
   .about-grid {
@@ -253,6 +272,17 @@ body {
   .contact-grid {
     grid-template-columns: 1fr !important;
     gap: 60px !important;
+  }
+  .project-row-top {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .project-links {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-top: 0 !important;
+    gap: 20px !important;
   }
 }
 

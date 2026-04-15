@@ -13,7 +13,6 @@ export default function Hero({ onContactClick }) {
   const [revealed, setRevealed] = useState(false)
   const [hovered, setHovered]   = useState(false)
 
-  /* ── fit text to container width ── */
   useEffect(() => {
     const measureText = (text, fontFamily, fontWeight, letterSpacing, fontSize) => {
       const span = document.createElement('span')
@@ -46,7 +45,7 @@ export default function Hero({ onContactClick }) {
 
     const fit = () => {
       if (!containerRef.current) return
-      const maxW = containerRef.current.clientWidth - 96 // 48px padding × 2
+      const maxW = containerRef.current.clientWidth - 96
       fitLine(line1Ref.current, maxW)
       fitLine(line2Ref.current, maxW)
     }
@@ -60,22 +59,21 @@ export default function Hero({ onContactClick }) {
     return () => window.removeEventListener('resize', fit)
   }, [])
 
-  const nameColor = hovered ? '#22c55e' : '#0a0a0a'
+  const nameColor = hovered ? '#22c55e' : '#ffffff'
 
   return (
     <section
       id="hero"
       style={{
-        background: '#F5F0E8',
+        background: '#000000',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* ── main content ── */}
       <div
         ref={containerRef}
         style={{
-          padding: '108px 48px 56px',
+          padding: '120px 48px 56px',
           minHeight: '100vh',
           display: 'flex',
           flexDirection: 'column',
@@ -88,7 +86,7 @@ export default function Hero({ onContactClick }) {
             fontFamily: 'var(--font-space)',
             fontSize: '0.72rem',
             letterSpacing: '0.2em',
-            color: '#888',
+            color: '#22c55e',
             textTransform: 'uppercase',
             marginBottom: '28px',
           }}
@@ -109,7 +107,7 @@ export default function Hero({ onContactClick }) {
               style={{
                 fontFamily: 'var(--font-jevena)',
                 fontWeight: 700,
-                lineHeight: 0.88,
+                lineHeight: 0.95,
                 whiteSpace: 'nowrap',
                 color: nameColor,
                 letterSpacing: '-0.02em',
@@ -127,7 +125,7 @@ export default function Hero({ onContactClick }) {
               style={{
                 fontFamily: 'var(--font-jevena)',
                 fontWeight: 700,
-                lineHeight: 0.88,
+                lineHeight: 0.95,
                 whiteSpace: 'nowrap',
                 color: nameColor,
                 letterSpacing: '-0.02em',
@@ -151,12 +149,11 @@ export default function Hero({ onContactClick }) {
             gap: '24px',
           }}
         >
-          {/* subtitle */}
           <p
             className={`hero-subtitle${revealed ? ' revealed' : ''}`}
             style={{
               fontFamily: 'var(--font-space)',
-              color: '#333',
+              color: 'rgba(255,255,255,0.55)',
               maxWidth: '380px',
               fontSize: '0.88rem',
               lineHeight: 1.7,
@@ -166,7 +163,6 @@ export default function Hero({ onContactClick }) {
             Je crée des interfaces modernes, fluides et centrées sur l'expérience utilisateur.
           </p>
 
-          {/* badge pills */}
           <div
             className={`hero-badges${revealed ? ' revealed' : ''}`}
             style={{
@@ -184,19 +180,19 @@ export default function Hero({ onContactClick }) {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
-                  border: '1px solid #0a0a0a',
+                  border: '1px solid rgba(255,255,255,0.2)',
                   padding: '8px 20px',
                   borderRadius: '999px',
                   fontSize: '0.68rem',
                   letterSpacing: '0.13em',
-                  color: '#0a0a0a',
+                  color: '#ffffff',
                   fontFamily: 'var(--font-space)',
                   background: 'transparent',
                   cursor: dot ? 'pointer' : 'default',
-                  transition: 'background 0.2s ease',
+                  transition: 'border-color 0.2s ease, background 0.2s ease',
                 }}
-                onMouseEnter={(e) => { if (dot) e.currentTarget.style.background = 'rgba(34,197,94,0.08)' }}
-                onMouseLeave={(e) => { if (dot) e.currentTarget.style.background = 'transparent' }}
+                onMouseEnter={(e) => { if (dot) { e.currentTarget.style.background = 'rgba(34,197,94,0.08)'; e.currentTarget.style.borderColor = '#22c55e' } }}
+                onMouseLeave={(e) => { if (dot) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)' } }}
               >
                 {dot && (
                   <span
@@ -218,7 +214,7 @@ export default function Hero({ onContactClick }) {
         </div>
       </div>
 
-      {/* ── SCROLL indicator (right edge) ── */}
+      {/* SCROLL indicator */}
       <div
         className={`hero-scroll${revealed ? ' revealed' : ''}`}
         style={{
@@ -236,7 +232,7 @@ export default function Hero({ onContactClick }) {
             fontFamily: 'var(--font-space)',
             fontSize: '9px',
             letterSpacing: '0.35em',
-            color: '#888',
+            color: 'rgba(255,255,255,0.3)',
             textTransform: 'uppercase',
             writingMode: 'vertical-rl',
             transform: 'rotate(180deg)',
@@ -246,19 +242,6 @@ export default function Hero({ onContactClick }) {
         </span>
         <div className="scroll-line" />
       </div>
-
-      {/* ── bottom gradient fade to dark ── */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '120px',
-          background: 'linear-gradient(to bottom, transparent, #0a0f0a)',
-          pointerEvents: 'none',
-        }}
-      />
     </section>
   )
 }

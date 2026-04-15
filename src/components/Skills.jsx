@@ -58,7 +58,7 @@ function MarqueeRow({ skills, direction = 'left', speed = '35s' }) {
 
 export default function Skills() {
   return (
-    <section id="skills" style={{ background: '#0a0f0a', padding: '100px 0' }}>
+    <section id="skills" style={{ background: '#000000', padding: '100px 0' }}>
 
       {/* header */}
       <div style={{ padding: '0 48px', maxWidth: '1100px', margin: '0 auto' }}>

@@ -41,7 +41,7 @@ export default function Contacts() {
   })
 
   return (
-    <section id="contacts" style={{ background: '#0a0f0a', padding: '100px 48px 80px' }}>
+    <section id="contacts" style={{ background: '#000000', padding: '100px 48px 80px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* header */}
