@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 const badges = [
   { dot: true,  label: 'AVAILABLE FOR WORK' },
   { dot: false, label: 'COTONOU, BÉNIN' },
-  { dot: false, label: 'FULL-STACK DEVELOPER' },
+  { dot: false, label: 'DS DEV' },
 ]
 
 export default function Hero({ onContactClick }) {
