@@ -1,122 +1,174 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+const badges = [
+  { dot: true,  label: 'AVAILABLE FOR WORK' },
+  { dot: false, label: 'COTONOU, BÉNIN' },
+  { dot: false, label: 'FULL-STACK DEVELOPER' },
+]
 
 export default function Hero({ onContactClick }) {
-  const line1Ref = useRef(null)
-  const line2Ref = useRef(null)
+  const line1Ref    = useRef(null)
+  const line2Ref    = useRef(null)
   const containerRef = useRef(null)
+  const [revealed, setRevealed] = useState(false)
+  const [hovered, setHovered]   = useState(false)
 
+  /* ── fit text to container width ── */
   useEffect(() => {
-    const fitLine = (el, container) => {
-      if (!el || !container) return
-      let size = 5
-      el.style.fontSize = size + 'vw'
-      const maxWidth = container.clientWidth
-      while (el.scrollWidth < maxWidth - 1 && size < 40) {
-        size += 0.05
-        el.style.fontSize = size + 'vw'
-      }
-      el.style.fontSize = (size - 0.1) + 'vw'
+    const measureText = (text, fontFamily, fontWeight, letterSpacing, fontSize) => {
+      const span = document.createElement('span')
+      span.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;top:0;left:-9999px;'
+      span.style.fontFamily = fontFamily
+      span.style.fontWeight = fontWeight
+      span.style.letterSpacing = letterSpacing
+      span.style.fontSize = fontSize + 'px'
+      span.textContent = text
+      document.body.appendChild(span)
+      const w = span.getBoundingClientRect().width
+      document.body.removeChild(span)
+      return w
+    }
+
+    const fitLine = (el, maxWidth) => {
+      if (!el || maxWidth <= 0) return
+      const cs = getComputedStyle(el)
+      const w100 = measureText(
+        el.textContent.trim(),
+        cs.fontFamily,
+        cs.fontWeight,
+        cs.letterSpacing,
+        100
+      )
+      if (w100 === 0) return
+      const targetPx = (100 * maxWidth) / w100
+      el.style.fontSize = Math.min(targetPx, 300) + 'px'
     }
 
     const fit = () => {
-      if (containerRef.current) {
-        fitLine(line1Ref.current, containerRef.current)
-        fitLine(line2Ref.current, containerRef.current)
-      }
+      if (!containerRef.current) return
+      const maxW = containerRef.current.clientWidth - 96 // 48px padding × 2
+      fitLine(line1Ref.current, maxW)
+      fitLine(line2Ref.current, maxW)
     }
 
     document.fonts.ready.then(() => {
       fit()
       window.addEventListener('resize', fit)
+      requestAnimationFrame(() => setRevealed(true))
     })
 
     return () => window.removeEventListener('resize', fit)
   }, [])
 
+  const nameColor = hovered ? '#22c55e' : '#0a0a0a'
+
   return (
     <section
       id="hero"
       style={{
-        background: '#f0ebe0',
-        minHeight: '100vh',
+        background: '#F5F0E8',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
+      {/* ── main content ── */}
       <div
         ref={containerRef}
         style={{
-          padding: '110px 48px 52px',
-          height: '100vh',
+          padding: '108px 48px 56px',
+          minHeight: '100vh',
           display: 'flex',
           flexDirection: 'column',
           boxSizing: 'border-box',
         }}
       >
+        {/* role label */}
         <div
           style={{
             fontFamily: 'var(--font-space)',
             fontSize: '0.72rem',
-            letterSpacing: '0.18em',
+            letterSpacing: '0.2em',
             color: '#888',
-            marginBottom: '24px',
             textTransform: 'uppercase',
+            marginBottom: '28px',
           }}
         >
           Développeur Web Full-Stack
         </div>
 
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '-40px' }}>
-          <div
-            ref={line1Ref}
-            style={{
-              fontFamily: 'var(--font-jevena)',
-              fontWeight: 700,
-              lineHeight: 0.88,
-              whiteSpace: 'nowrap',
-              color: '#0d0d0d',
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Dolores
+        {/* massive name */}
+        <div
+          style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          <div className="hero-name-mask">
+            <div
+              className={`hero-name-line${revealed ? ' revealed' : ''}`}
+              ref={line1Ref}
+              style={{
+                fontFamily: 'var(--font-jevena)',
+                fontWeight: 700,
+                lineHeight: 0.88,
+                whiteSpace: 'nowrap',
+                color: nameColor,
+                letterSpacing: '-0.02em',
+                transition: 'color 0.4s ease',
+                animationDelay: '0ms',
+              }}
+            >
+              DOLORES
+            </div>
           </div>
-          <div
-            ref={line2Ref}
-            style={{
-              fontFamily: 'var(--font-jevena)',
-              fontWeight: 700,
-              lineHeight: 0.88,
-              whiteSpace: 'nowrap',
-              color: '#0d0d0d',
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Vlafonou
+          <div className="hero-name-mask">
+            <div
+              className={`hero-name-line${revealed ? ' revealed' : ''}`}
+              ref={line2Ref}
+              style={{
+                fontFamily: 'var(--font-jevena)',
+                fontWeight: 700,
+                lineHeight: 0.88,
+                whiteSpace: 'nowrap',
+                color: nameColor,
+                letterSpacing: '-0.02em',
+                transition: 'color 0.4s ease',
+                animationDelay: '200ms',
+              }}
+            >
+              VLAFONOU
+            </div>
           </div>
         </div>
 
+        {/* bottom row */}
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
-            paddingTop: '40px',
+            paddingTop: '44px',
+            flexWrap: 'wrap',
+            gap: '24px',
           }}
         >
+          {/* subtitle */}
           <p
+            className={`hero-subtitle${revealed ? ' revealed' : ''}`}
             style={{
               fontFamily: 'var(--font-space)',
-              color: '#777',
-              maxWidth: '300px',
-              fontSize: '0.9rem',
-              lineHeight: 1.65,
+              color: '#333',
+              maxWidth: '380px',
+              fontSize: '0.88rem',
+              lineHeight: 1.7,
               margin: 0,
             }}
           >
             Je crée des interfaces modernes, fluides et centrées sur l'expérience utilisateur.
           </p>
 
+          {/* badge pills */}
           <div
+            className={`hero-badges${revealed ? ' revealed' : ''}`}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -124,82 +176,89 @@ export default function Hero({ onContactClick }) {
               alignItems: 'flex-end',
             }}
           >
-            <div
-              style={{
-                background: '#0d0d0d',
-                color: '#f0ebe0',
-                padding: '9px 22px',
-                borderRadius: '999px',
-                fontSize: '0.7rem',
-                letterSpacing: '0.12em',
-                fontFamily: 'var(--font-space)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                cursor: 'pointer',
-              }}
-              onClick={onContactClick}
-            >
-              <span style={{ color: '#22c55e', fontSize: '10px' }}>●</span>
-              DISPONIBLE POUR TRAVAILLER
-            </div>
-            <div
-              style={{
-                border: '1px solid #ccc',
-                padding: '9px 22px',
-                borderRadius: '999px',
-                fontSize: '0.7rem',
-                letterSpacing: '0.12em',
-                color: '#888',
-                fontFamily: 'var(--font-space)',
-              }}
-            >
-              PARIS, FRANCE
-            </div>
-            <div
-              style={{
-                border: '1px solid #ccc',
-                padding: '9px 22px',
-                borderRadius: '999px',
-                fontSize: '0.7rem',
-                letterSpacing: '0.12em',
-                color: '#888',
-                fontFamily: 'var(--font-space)',
-              }}
-            >
-              FULL-STACK DEVELOPER
-            </div>
+            {badges.map(({ dot, label }) => (
+              <div
+                key={label}
+                onClick={dot ? onContactClick : undefined}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  border: '1px solid #0a0a0a',
+                  padding: '8px 20px',
+                  borderRadius: '999px',
+                  fontSize: '0.68rem',
+                  letterSpacing: '0.13em',
+                  color: '#0a0a0a',
+                  fontFamily: 'var(--font-space)',
+                  background: 'transparent',
+                  cursor: dot ? 'pointer' : 'default',
+                  transition: 'background 0.2s ease',
+                }}
+                onMouseEnter={(e) => { if (dot) e.currentTarget.style.background = 'rgba(34,197,94,0.08)' }}
+                onMouseLeave={(e) => { if (dot) e.currentTarget.style.background = 'transparent' }}
+              >
+                {dot && (
+                  <span
+                    className="pulse-dot"
+                    style={{
+                      display: 'inline-block',
+                      width: '7px',
+                      height: '7px',
+                      borderRadius: '50%',
+                      backgroundColor: '#22c55e',
+                      flexShrink: 0,
+                    }}
+                  />
+                )}
+                {label}
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
+      {/* ── SCROLL indicator (right edge) ── */}
       <div
+        className={`hero-scroll${revealed ? ' revealed' : ''}`}
         style={{
           position: 'absolute',
-          right: '-20px',
-          top: '50%',
-          transform: 'translateY(-50%) rotate(90deg)',
-          fontSize: '0.62rem',
-          letterSpacing: '0.35em',
-          color: '#bbb',
-          fontFamily: 'var(--font-space)',
-          userSelect: 'none',
+          right: '22px',
+          bottom: '80px',
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
-          gap: '12px',
+          gap: '10px',
         }}
       >
         <span
           style={{
-            display: 'inline-block',
-            width: '40px',
-            height: '1px',
-            background: '#ccc',
-            verticalAlign: 'middle',
+            fontFamily: 'var(--font-space)',
+            fontSize: '9px',
+            letterSpacing: '0.35em',
+            color: '#888',
+            textTransform: 'uppercase',
+            writingMode: 'vertical-rl',
+            transform: 'rotate(180deg)',
           }}
-        />
-        SCROLL
+        >
+          Scroll
+        </span>
+        <div className="scroll-line" />
       </div>
+
+      {/* ── bottom gradient fade to dark ── */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '120px',
+          background: 'linear-gradient(to bottom, transparent, #0a0f0a)',
+          pointerEvents: 'none',
+        }}
+      />
     </section>
   )
 }

@@ -1,0 +1,55 @@
+── 2. HERO (full viewport height) ──────────────────────────
+
+DESIGN REFERENCE: dvdrod.com style — minimalist, editorial, 
+typographic-forward. Light cream background, massive black 
+display name, clean layout.
+
+BACKGROUND: #F5F0E8 (warm cream/beige) — hero section only
+
+LAYOUT:
+- Top left: role label in small uppercase spaced letters
+  → "DEVELOPPEUR WEB FULL-STACK" (Space Grotesk, 
+    tracking-widest, text-sm, muted color #888)
+
+- Center/full width: Name displayed in two stacked lines, 
+  oversized and bleeding edge-to-edge:
+    Line 1 → "DOLORES"
+    Line 2 → "VLAFONOU"
+  → Font: Jevena, black (#0a0a0a), bold
+  → Font size: clamp(80px, 15vw, 200px) — fills full width
+  → Letter spacing: tight (-0.02em)
+  → No padding, name spans full container width
+
+- Bottom left: subtitle paragraph (Space Grotesk, small)
+  → "Je crée des interfaces modernes, fluides et centrées 
+     sur l'expérience utilisateur."
+  → Color: #333, max-width: 380px
+
+- Bottom right: info badge pills (like dvdrod.com):
+  → Pill 1 (with green pulsing dot): "AVAILABLE FOR WORK"
+  → Pill 2: "COTONOU, BÉNIN"
+  → Pill 3: "FULL-STACK DEVELOPER"
+  → Style: border #0a0a0a, rounded-full, small text, 
+    Space Grotesk, background transparent
+
+- Right edge center: vertical "SCROLL" text rotated 90°
+  with a thin animated line below it (line grows downward)
+  → Color: #888, font-size: 10px, tracking-widest
+
+ANIMATIONS:
+- Name appears with a reveal animation:
+  each line slides up from below (translateY 60px → 0) 
+  with opacity 0→1, staggered 200ms between lines
+- Subtitle fades in after name (delay 600ms)
+- Pills slide in from right (delay 800ms)
+- Scroll indicator fades in last (delay 1000ms)
+
+HOVER on name: subtle skew or color shift — 
+text color shifts slightly from #0a0a0a to #22c55e 
+on hover (smooth 0.4s transition)
+
+NOTE: This section uses cream background (#F5F0E8) 
+and dark text — inverse of the rest of the site 
+which stays dark green/black. Add a smooth color 
+transition between hero and the next section using 
+a gradient fade at the bottom of the hero.
