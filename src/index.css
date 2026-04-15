@@ -219,6 +219,43 @@ body {
   border-color: #22c55e;
 }
 
+/* ── Section reveal on scroll ────────────────────── */
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal-item {
+  opacity: 0;
+}
+
+.reveal-item.in-view {
+  animation: reveal-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Skill badge hover ───────────────────────────── */
+.skill-badge:hover {
+  border-color: rgba(34, 197, 94, 0.3) !important;
+  color: #e8e4dc !important;
+}
+
+/* ── Responsive grids ────────────────────────────── */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  .expertise-row {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 60px !important;
+  }
+}
+
 /* ── Grid bg ─────────────────────────────────────── */
 
 .grid-bg {

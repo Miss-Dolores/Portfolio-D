@@ -1,125 +1,186 @@
-import { useEffect, useRef } from 'react'
-import { ExternalLink, GitFork } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowUpRight, GitFork } from 'lucide-react'
 
 const projects = [
   {
+    num: '01',
     title: 'E-Commerce Dashboard',
     description: 'Application de gestion e-commerce avec tableau de bord analytique, gestion des stocks et suivi des commandes en temps réel.',
     tags: ['React', 'Node.js', 'Tailwind CSS'],
+    year: '2024',
     live: '#',
     github: '#',
   },
   {
+    num: '02',
     title: 'Portfolio Personnel',
     description: 'Site vitrine minimaliste avec animations CSS avancées, design system cohérent et expérience utilisateur optimisée.',
     tags: ['React', 'Vite', 'CSS'],
+    year: '2024',
     live: '#',
     github: '#',
   },
   {
+    num: '03',
     title: 'API REST Blog',
     description: 'Backend complet pour une plateforme de blogging : authentification JWT, gestion CRUD, base de données PostgreSQL.',
     tags: ['Node.js', 'JavaScript', 'Git'],
+    year: '2023',
     live: '#',
     github: '#',
   },
 ]
 
-function ProjectCard({ project, delay }) {
-  const cardRef = useRef(null)
+function ProjectRow({ project, delay }) {
+  const ref = useRef(null)
+  const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
-    const el = cardRef.current
+    const el = ref.current
     if (!el) return
-
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('visible')
+          setTimeout(() => el.classList.add('in-view'), delay)
           obs.disconnect()
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     )
     obs.observe(el)
     return () => obs.disconnect()
-  }, [])
+  }, [delay])
 
   return (
     <div
-      ref={cardRef}
-      className="card-animate glass-card rounded-2xl p-7 flex flex-col gap-5"
-      style={{ '--delay': `${delay}ms` }}
+      ref={ref}
+      className="reveal-item"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '56px 1fr auto',
+        gap: '40px',
+        padding: '40px 0',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        alignItems: 'start',
+        cursor: 'pointer',
+        transition: 'opacity 0.3s',
+      }}
     >
+      {/* number */}
+      <span style={{
+        fontFamily: 'var(--font-space)',
+        fontSize: '0.68rem',
+        color: hovered ? '#22c55e' : '#333',
+        letterSpacing: '0.12em',
+        paddingTop: '8px',
+        transition: 'color 0.3s',
+      }}>
+        {project.num}
+      </span>
+
+      {/* main content */}
       <div>
-        <div
-          className="inline-block px-3 py-1 rounded-full text-xs font-medium mb-3"
-          style={{
-            background: 'rgba(34,197,94,0.1)',
-            color: '#22c55e',
+        <div style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '20px',
+          marginBottom: '16px',
+          flexWrap: 'wrap',
+        }}>
+          <h3 style={{
+            fontFamily: 'var(--font-jevena)',
+            color: hovered ? '#22c55e' : '#e8e4dc',
+            fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
+            fontWeight: 700,
+            letterSpacing: '-0.02em',
+            lineHeight: 1,
+            transition: 'color 0.35s ease',
+          }}>
+            {project.title}
+          </h3>
+          <span style={{
             fontFamily: 'var(--font-space)',
-            border: '1px solid rgba(34,197,94,0.2)',
-          }}
-        >
-          Projet
+            fontSize: '0.68rem',
+            color: '#333',
+            letterSpacing: '0.1em',
+          }}>
+            {project.year}
+          </span>
         </div>
-        <h3
-          className="text-xl font-bold mb-2"
-          style={{ fontFamily: 'var(--font-jevena)', color: '#f0f5f0' }}
-        >
-          {project.title}
-        </h3>
-        <p
-          className="text-sm leading-relaxed"
-          style={{ color: '#6b7c6b', fontFamily: 'var(--font-space)' }}
-        >
+
+        <p style={{
+          fontFamily: 'var(--font-space)',
+          color: '#666',
+          fontSize: '0.88rem',
+          lineHeight: 1.7,
+          maxWidth: '520px',
+          marginBottom: '20px',
+        }}>
           {project.description}
         </p>
-      </div>
 
-      <div className="flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-3 py-1 rounded-full text-xs font-medium"
-            style={{
-              background: 'rgba(34,197,94,0.08)',
-              color: '#22c55e',
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          {project.tags.map(tag => (
+            <span key={tag} style={{
               fontFamily: 'var(--font-space)',
-              border: '1px solid rgba(34,197,94,0.15)',
-            }}
-          >
-            {tag}
-          </span>
-        ))}
+              fontSize: '0.65rem',
+              color: '#444',
+              border: '1px solid rgba(255,255,255,0.07)',
+              padding: '4px 12px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}>
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
 
-      <div className="flex gap-3 mt-auto">
+      {/* links */}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+        alignItems: 'flex-end',
+        paddingTop: '4px',
+      }}>
         <a
           href={project.live}
-          className="btn-slide flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
             fontFamily: 'var(--font-space)',
-            color: '#f0f5f0',
-            border: '1px solid #22c55e',
-            background: 'transparent',
+            fontSize: '0.72rem',
+            letterSpacing: '0.12em',
+            color: hovered ? '#22c55e' : '#555',
+            textDecoration: 'none',
+            transition: 'color 0.3s',
+            textTransform: 'uppercase',
           }}
         >
-          <ExternalLink size={15} />
-          Live
+          Live <ArrowUpRight size={13} />
         </a>
         <a
           href={project.github}
-          className="btn-slide flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
             fontFamily: 'var(--font-space)',
-            color: '#f0f5f0',
-            border: '1px solid #1a2e1a',
-            background: 'transparent',
+            fontSize: '0.72rem',
+            letterSpacing: '0.12em',
+            color: '#333',
+            textDecoration: 'none',
+            transition: 'color 0.3s',
+            textTransform: 'uppercase',
           }}
+          onMouseEnter={e => e.currentTarget.style.color = '#888'}
+          onMouseLeave={e => e.currentTarget.style.color = '#333'}
         >
-          <GitFork size={15} />
-          GitHub
+          Code <GitFork size={13} />
         </a>
       </div>
     </div>
@@ -128,32 +189,61 @@ function ProjectCard({ project, delay }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ fontFamily: 'var(--font-jevena)', color: '#f0f5f0', letterSpacing: '-0.01em' }}
-          >
-            Projects
-          </h2>
-          <div
-            className="w-16 h-0.5 mx-auto rounded-full"
-            style={{ backgroundColor: '#22c55e' }}
-          />
-          <p
-            className="mt-4 text-sm"
-            style={{ color: '#6b7c6b', fontFamily: 'var(--font-space)' }}
-          >
-            Quelques projets sur lesquels j'ai travaillé
+    <section id="projects" style={{ background: '#0a0f0a', padding: '100px 48px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+
+        {/* header */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          paddingBottom: '28px',
+          marginBottom: '0',
+          flexWrap: 'wrap',
+          gap: '16px',
+        }}>
+          <div>
+            <span style={{
+              color: '#22c55e',
+              fontSize: '0.68rem',
+              letterSpacing: '0.22em',
+              fontFamily: 'var(--font-space)',
+              display: 'block',
+              marginBottom: '10px',
+              textTransform: 'uppercase',
+            }}>
+              03 — Projects
+            </span>
+            <h2 style={{
+              fontFamily: 'var(--font-jevena)',
+              color: '#e8e4dc',
+              fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+              fontWeight: 700,
+              lineHeight: 0.95,
+              letterSpacing: '-0.02em',
+            }}>
+              Projets
+            </h2>
+          </div>
+          <p style={{
+            fontFamily: 'var(--font-space)',
+            color: '#444',
+            fontSize: '0.8rem',
+            letterSpacing: '0.05em',
+          }}>
+            {projects.length} projets sélectionnés
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-7">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.title} project={project} delay={i * 150} />
+        {/* project rows */}
+        <div>
+          {projects.map((p, i) => (
+            <ProjectRow key={p.num} project={p} delay={i * 100} />
           ))}
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }} />
         </div>
+
       </div>
     </section>
   )

@@ -1,61 +1,192 @@
-import { Monitor, Server } from 'lucide-react'
+import { useEffect, useRef } from 'react'
 
-const cards = [
+const expertise = [
   {
-    icon: Monitor,
-    title: 'Developpeur front-end',
-    text: "Je suis un développeur front-end passionné qui maîtrise les technologies web modernes telles que HTML, CSS et JavaScript. Mon objectif est de transformer les idées en réalités pour offrir des sites web attrayants et performants.",
+    label: 'Front-end',
+    title: 'Développeur front-end',
+    text: 'Je maîtrise les technologies web modernes — HTML, CSS, JavaScript, React. Mon objectif est de transformer les idées en interfaces attrayantes, fluides et performantes.',
+    stack: ['React', 'JavaScript', 'CSS', 'HTML'],
   },
   {
-    icon: Server,
-    title: 'Developpeur back-end',
-    text: "En tant que développeur back-end, je suis spécialisé dans la création de la logique serveur et la gestion des bases de données pour assurer le bon fonctionnement des applications web.",
+    label: 'Back-end',
+    title: 'Développeur back-end',
+    text: 'Spécialisé dans la logique serveur et la gestion des bases de données, je conçois des APIs robustes pour assurer le bon fonctionnement des applications web.',
+    stack: ['Node.js', 'REST API', 'PostgreSQL', 'Git'],
   },
 ]
 
+function RevealItem({ children, delay = 0 }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => el.classList.add('in-view'), delay)
+          obs.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [delay])
+  return <div ref={ref} className="reveal-item">{children}</div>
+}
+
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ fontFamily: 'var(--font-jevena)', color: '#f0f5f0', letterSpacing: '-0.01em' }}
+    <section id="about" style={{ background: '#0a0f0a', padding: '100px 48px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+
+        {/* header row */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          paddingBottom: '28px',
+          marginBottom: '80px',
+          flexWrap: 'wrap',
+          gap: '16px',
+        }}>
+          <div>
+            <span style={{
+              color: '#22c55e',
+              fontSize: '0.68rem',
+              letterSpacing: '0.22em',
+              fontFamily: 'var(--font-space)',
+              display: 'block',
+              marginBottom: '10px',
+              textTransform: 'uppercase',
+            }}>
+              01 — About
+            </span>
+            <h2 style={{
+              fontFamily: 'var(--font-jevena)',
+              color: '#e8e4dc',
+              fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+              fontWeight: 700,
+              lineHeight: 0.95,
+              letterSpacing: '-0.02em',
+            }}>
+              À propos
+            </h2>
+          </div>
+          <p style={{
+            fontFamily: 'var(--font-space)',
+            color: '#444',
+            fontSize: '0.8rem',
+            letterSpacing: '0.05em',
+          }}>
+            Cotonou, Bénin · Disponible
+          </p>
+        </div>
+
+        {/* intro */}
+        <RevealItem delay={100}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1.6fr',
+            gap: '80px',
+            marginBottom: '80px',
+            alignItems: 'start',
+          }}
+          className="about-grid"
           >
-            About
-          </h2>
-          <div
-            className="w-16 h-0.5 mx-auto rounded-full"
-            style={{ backgroundColor: '#22c55e' }}
-          />
-        </div>
+            <p style={{
+              fontFamily: 'var(--font-space)',
+              color: '#888',
+              fontSize: '0.82rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              lineHeight: 1.6,
+              paddingTop: '6px',
+            }}>
+              Développeur Web<br />Full-Stack
+            </p>
+            <p style={{
+              fontFamily: 'var(--font-space)',
+              color: '#b0aca6',
+              fontSize: '1.1rem',
+              lineHeight: 1.75,
+            }}>
+              Passionné par la création d'expériences numériques modernes et performantes. 
+              Je combine maîtrise technique et sensibilité design pour livrer des produits 
+              qui font la différence — du concept à la mise en production.
+            </p>
+          </div>
+        </RevealItem>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {cards.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="glass-card rounded-2xl p-8">
+        {/* expertise rows */}
+        <div>
+          {expertise.map(({ label, title, text, stack }, i) => (
+            <RevealItem key={label} delay={200 + i * 150}>
               <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
-                style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)' }}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '0.4fr 1fr 0.8fr',
+                  gap: '48px',
+                  padding: '40px 0',
+                  borderTop: '1px solid rgba(255,255,255,0.07)',
+                  alignItems: 'start',
+                  transition: 'background 0.3s ease',
+                  cursor: 'default',
+                }}
+                className="expertise-row"
               >
-                <Icon size={28} style={{ color: '#22c55e' }} />
+                <div>
+                  <span style={{
+                    fontFamily: 'var(--font-space)',
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.2em',
+                    color: '#22c55e',
+                    textTransform: 'uppercase',
+                    display: 'block',
+                    marginBottom: '12px',
+                  }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 style={{
+                    fontFamily: 'var(--font-jevena)',
+                    color: '#e8e4dc',
+                    fontSize: '1.4rem',
+                    fontWeight: 700,
+                    letterSpacing: '-0.01em',
+                  }}>
+                    {title}
+                  </h3>
+                </div>
+                <p style={{
+                  fontFamily: 'var(--font-space)',
+                  color: '#888',
+                  fontSize: '0.92rem',
+                  lineHeight: 1.7,
+                  paddingTop: '2px',
+                }}>
+                  {text}
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', paddingTop: '4px' }}>
+                  {stack.map(s => (
+                    <span key={s} style={{
+                      fontFamily: 'var(--font-space)',
+                      fontSize: '0.68rem',
+                      letterSpacing: '0.12em',
+                      color: '#555',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      padding: '5px 12px',
+                      borderRadius: '999px',
+                      textTransform: 'uppercase',
+                    }}>{s}</span>
+                  ))}
+                </div>
               </div>
-
-              <h3
-                className="text-xl font-semibold mb-4"
-                style={{ fontFamily: 'var(--font-jevena)', color: '#f0f5f0' }}
-              >
-                {title}
-              </h3>
-
-              <p
-                className="leading-relaxed"
-                style={{ fontFamily: 'var(--font-space)', color: '#6b7c6b', fontSize: '0.95rem' }}
-              >
-                {text}
-              </p>
-            </div>
+            </RevealItem>
           ))}
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }} />
         </div>
+
       </div>
     </section>
   )
