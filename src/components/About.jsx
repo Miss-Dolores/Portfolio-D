@@ -136,7 +136,9 @@ export default function About() {
             }}>
               Passionné par la création d'expériences numériques modernes et performantes. 
               Je combine maîtrise technique et sensibilité design pour livrer des produits 
-              qui font la différence — du concept à la mise en production.
+              qui font la différence — du concept à la mise en production.{' '}
+              Que ce soit une interface utilisateur soignée ou une API robuste côté serveur, j'apporte le même niveau d'exigence à chaque ligne de code.{' '}
+              Mon ambition : construire des solutions qui durent et qui impressionnent.
             </p>
           </div>
         </RevealItem>

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import WhatIBuild from './components/WhatIBuild'
 import About from './components/About'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
@@ -49,6 +50,7 @@ export default function App() {
       <Navbar onNavClick={handleNavClick} activeSection={activeSection} />
       <div ref={contentRef} className="page-fade-in">
         <Hero onContactClick={() => handleNavClick('#contacts')} />
+        <WhatIBuild />
         <About />
         <Skills />
         <Projects />
