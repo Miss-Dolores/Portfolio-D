@@ -67,6 +67,16 @@ body {
   50%       { transform: scale(0.6); opacity: 0.5; }
 }
 
+.hero-container {
+  padding: 120px 48px 56px;
+}
+
+@media (max-width: 640px) {
+  .hero-container {
+    padding: 100px 24px 48px;
+  }
+}
+
 .hero-name-mask {
   overflow: hidden;
   padding-top: 0.12em;

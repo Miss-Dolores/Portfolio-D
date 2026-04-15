@@ -28,7 +28,7 @@ export default function Hero({ onContactClick }) {
       return w
     }
 
-    const fitLine = (el, maxWidth) => {
+    const fitLine = (el, maxWidth, capPx) => {
       if (!el || maxWidth <= 0) return
       const cs = getComputedStyle(el)
       const w100 = measureText(
@@ -40,14 +40,20 @@ export default function Hero({ onContactClick }) {
       )
       if (w100 === 0) return
       const targetPx = (100 * maxWidth) / w100
-      el.style.fontSize = Math.min(targetPx, 300) + 'px'
+      el.style.fontSize = Math.min(targetPx, capPx) + 'px'
     }
 
     const fit = () => {
       if (!containerRef.current) return
-      const maxW = containerRef.current.clientWidth - 96
-      fitLine(line1Ref.current, maxW)
-      fitLine(line2Ref.current, maxW)
+      const vw = window.innerWidth
+      const isMobile = vw < 640
+      const isTablet = vw >= 640 && vw < 1024
+      const scaleFactor = isMobile ? 0.42 : isTablet ? 0.65 : 0.78
+      const capPx = isMobile ? 70 : isTablet ? 130 : 185
+      const hPad = isMobile ? 48 : 96
+      const maxW = (containerRef.current.clientWidth - hPad) * scaleFactor
+      fitLine(line1Ref.current, maxW, capPx)
+      fitLine(line2Ref.current, maxW, capPx)
     }
 
     document.fonts.ready.then(() => {
@@ -72,8 +78,8 @@ export default function Hero({ onContactClick }) {
     >
       <div
         ref={containerRef}
+        className="hero-container"
         style={{
-          padding: '120px 48px 56px',
           minHeight: '100vh',
           display: 'flex',
           flexDirection: 'column',
