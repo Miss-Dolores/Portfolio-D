@@ -54,75 +54,38 @@ function ProjectRow({ project, delay }) {
   return (
     <div
       ref={ref}
-      className="reveal-item project-row"
+      className="reveal-item border-t border-white/[0.07] py-10 cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        padding: '40px 0',
-        borderTop: '1px solid rgba(255,255,255,0.07)',
-        cursor: 'pointer',
-        transition: 'opacity 0.3s',
-      }}
     >
-      {/* top line: number + title + year + links */}
       <div className="project-row-top">
-        <span style={{
-          fontFamily: 'var(--font-space)',
-          fontSize: '0.68rem',
-          color: hovered ? '#22c55e' : 'rgba(255,255,255,0.3)',
-          letterSpacing: '0.12em',
-          transition: 'color 0.3s',
-          flexShrink: 0,
-        }}>
+
+        {/* number */}
+        <span className={`font-[var(--font-space)] text-[0.68rem] tracking-[0.12em] transition-colors duration-300 shrink-0 pt-1 ${hovered ? 'text-green-500' : 'text-white/30'}`}>
           {project.num}
         </span>
 
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', flexWrap: 'wrap', marginBottom: '14px' }}>
-            <h3 style={{
-              fontFamily: 'var(--font-jevena)',
-              color: hovered ? '#22c55e' : '#ffffff',
-              fontSize: 'clamp(1.3rem, 3vw, 2.2rem)',
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              lineHeight: 1,
-              transition: 'color 0.35s ease',
-            }}>
+        {/* content */}
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-baseline gap-4 mb-3.5">
+            <h3
+              className={`font-[var(--font-jevena)] font-bold text-[clamp(1.3rem,3vw,2.2rem)] tracking-[-0.02em] leading-none transition-colors duration-350 ${hovered ? 'text-green-500' : 'text-white'}`}
+            >
               {project.title}
             </h3>
-            <span style={{
-              fontFamily: 'var(--font-space)',
-              fontSize: '0.68rem',
-              color: 'rgba(255,255,255,0.25)',
-              letterSpacing: '0.1em',
-            }}>
+            <span className="font-[var(--font-space)] text-[0.68rem] tracking-[0.1em] text-white/25">
               {project.year}
             </span>
           </div>
-
-          <p style={{
-            fontFamily: 'var(--font-space)',
-            color: 'rgba(255,255,255,0.45)',
-            fontSize: '0.88rem',
-            lineHeight: 1.7,
-            maxWidth: '520px',
-            marginBottom: '16px',
-          }}>
+          <p className="font-[var(--font-space)] text-[0.88rem] leading-[1.7] text-white/45 max-w-[520px] mb-4">
             {project.description}
           </p>
-
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <div className="flex flex-wrap gap-2">
             {project.tags.map(tag => (
-              <span key={tag} style={{
-                fontFamily: 'var(--font-space)',
-                fontSize: '0.65rem',
-                color: 'rgba(255,255,255,0.4)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                padding: '4px 12px',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-              }}>
+              <span
+                key={tag}
+                className="font-[var(--font-space)] text-[0.65rem] tracking-[0.1em] uppercase text-white/40 border border-white/10 rounded px-3 py-1"
+              >
                 {tag}
               </span>
             ))}
@@ -133,41 +96,18 @@ function ProjectRow({ project, delay }) {
         <div className="project-links">
           <a
             href={project.live}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontFamily: 'var(--font-space)',
-              fontSize: '0.72rem',
-              letterSpacing: '0.12em',
-              color: hovered ? '#22c55e' : 'rgba(255,255,255,0.4)',
-              textDecoration: 'none',
-              transition: 'color 0.3s',
-              textTransform: 'uppercase',
-            }}
+            className={`flex items-center gap-1.5 font-[var(--font-space)] text-[0.72rem] tracking-[0.12em] uppercase no-underline transition-colors duration-300 ${hovered ? 'text-green-500' : 'text-white/40'}`}
           >
             Live <ArrowUpRight size={13} />
           </a>
           <a
             href={project.github}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontFamily: 'var(--font-space)',
-              fontSize: '0.72rem',
-              letterSpacing: '0.12em',
-              color: 'rgba(255,255,255,0.25)',
-              textDecoration: 'none',
-              transition: 'color 0.3s',
-              textTransform: 'uppercase',
-            }}
-            onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.25)'}
+            className="flex items-center gap-1.5 font-[var(--font-space)] text-[0.72rem] tracking-[0.12em] uppercase text-white/25 no-underline transition-colors duration-300 hover:text-white/70"
           >
             Code <GitFork size={13} />
           </a>
         </div>
+
       </div>
     </div>
   )
@@ -175,59 +115,30 @@ function ProjectRow({ project, delay }) {
 
 export default function Projects() {
   return (
-    <section id="projects" style={{ background: '#000000', padding: '100px 48px' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+    <section id="projects" className="bg-black py-24 px-6 md:px-12">
+      <div className="max-w-[1100px] mx-auto">
 
         {/* header */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          borderBottom: '1px solid rgba(255,255,255,0.07)',
-          paddingBottom: '28px',
-          marginBottom: '0',
-          flexWrap: 'wrap',
-          gap: '16px',
-        }}>
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/[0.07] pb-7 mb-0">
           <div>
-            <span style={{
-              color: '#22c55e',
-              fontSize: '0.68rem',
-              letterSpacing: '0.22em',
-              fontFamily: 'var(--font-space)',
-              display: 'block',
-              marginBottom: '10px',
-              textTransform: 'uppercase',
-            }}>
+            <span className="block font-[var(--font-space)] text-[0.68rem] tracking-[0.22em] uppercase text-green-500 mb-2.5">
               03 — Projects
             </span>
-            <h2 style={{
-              fontFamily: 'var(--font-jevena)',
-              color: '#e8e4dc',
-              fontSize: 'clamp(2.4rem, 5vw, 4rem)',
-              fontWeight: 700,
-              lineHeight: 0.95,
-              letterSpacing: '-0.02em',
-            }}>
+            <h2 className="font-[var(--font-jevena)] font-bold text-[clamp(2.4rem,5vw,4rem)] text-[#e8e4dc] tracking-[-0.02em] leading-[0.95]">
               Projets
             </h2>
           </div>
-          <p style={{
-            fontFamily: 'var(--font-space)',
-            color: '#444',
-            fontSize: '0.8rem',
-            letterSpacing: '0.05em',
-          }}>
+          <p className="font-[var(--font-space)] text-[0.8rem] tracking-[0.05em] text-white/25">
             {projects.length} projets sélectionnés
           </p>
         </div>
 
-        {/* project rows */}
+        {/* rows */}
         <div>
           {projects.map((p, i) => (
             <ProjectRow key={p.num} project={p} delay={i * 100} />
           ))}
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }} />
+          <div className="border-t border-white/[0.07]" />
         </div>
 
       </div>
