@@ -45,8 +45,8 @@ export default function App() {
   }, [])
 
   return (
-    <div className="bg-black min-h-screen text-white">
-      <Navbar onNavClick={handleNavClick} activeSection={activeSection} />
+    <div className="bg-[#0a0f0a] min-h-screen text-[#f0f5f0]">
+      <Navbar onNavClick={handleNavClick} activeSection={activeSection} lightBg={activeSection === 'hero'} />
       <div ref={contentRef} className="page-fade-in">
         <Hero onContactClick={() => handleNavClick('#contacts')} />
         <About />

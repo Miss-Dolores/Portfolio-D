@@ -54,60 +54,134 @@ function ProjectRow({ project, delay }) {
   return (
     <div
       ref={ref}
-      className="reveal-item border-t border-white/[0.07] py-10 cursor-pointer"
+      className="reveal-item"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '56px 1fr auto',
+        gap: '40px',
+        padding: '40px 0',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        alignItems: 'start',
+        cursor: 'pointer',
+        transition: 'opacity 0.3s',
+      }}
     >
-      <div className="project-row-top">
+      {/* number */}
+      <span style={{
+        fontFamily: 'var(--font-space)',
+        fontSize: '0.68rem',
+        color: hovered ? '#22c55e' : '#333',
+        letterSpacing: '0.12em',
+        paddingTop: '8px',
+        transition: 'color 0.3s',
+      }}>
+        {project.num}
+      </span>
 
-        {/* number */}
-        <span className={`font-[var(--font-space)] text-[0.68rem] tracking-[0.12em] transition-colors duration-300 shrink-0 pt-1 ${hovered ? 'text-green-500' : 'text-white/30'}`}>
-          {project.num}
-        </span>
+      {/* main content */}
+      <div>
+        <div style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '20px',
+          marginBottom: '16px',
+          flexWrap: 'wrap',
+        }}>
+          <h3 style={{
+            fontFamily: 'var(--font-jevena)',
+            color: hovered ? '#22c55e' : '#e8e4dc',
+            fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
+            fontWeight: 700,
+            letterSpacing: '-0.02em',
+            lineHeight: 1,
+            transition: 'color 0.35s ease',
+          }}>
+            {project.title}
+          </h3>
+          <span style={{
+            fontFamily: 'var(--font-space)',
+            fontSize: '0.68rem',
+            color: '#333',
+            letterSpacing: '0.1em',
+          }}>
+            {project.year}
+          </span>
+        </div>
 
-        {/* content */}
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-baseline gap-4 mb-3.5">
-            <h3
-              className={`font-[var(--font-jevena)] font-bold text-[clamp(1.3rem,3vw,2.2rem)] tracking-[-0.02em] leading-none transition-colors duration-350 ${hovered ? 'text-green-500' : 'text-white'}`}
-            >
-              {project.title}
-            </h3>
-            <span className="font-[var(--font-space)] text-[0.68rem] tracking-[0.1em] text-white/25">
-              {project.year}
+        <p style={{
+          fontFamily: 'var(--font-space)',
+          color: '#666',
+          fontSize: '0.88rem',
+          lineHeight: 1.7,
+          maxWidth: '520px',
+          marginBottom: '20px',
+        }}>
+          {project.description}
+        </p>
+
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          {project.tags.map(tag => (
+            <span key={tag} style={{
+              fontFamily: 'var(--font-space)',
+              fontSize: '0.65rem',
+              color: '#444',
+              border: '1px solid rgba(255,255,255,0.07)',
+              padding: '4px 12px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}>
+              {tag}
             </span>
-          </div>
-          <p className="font-[var(--font-space)] text-[0.88rem] leading-[1.7] text-white/45 max-w-[520px] mb-4">
-            {project.description}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map(tag => (
-              <span
-                key={tag}
-                className="font-[var(--font-space)] text-[0.65rem] tracking-[0.1em] uppercase text-white/40 border border-white/10 rounded px-3 py-1"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          ))}
         </div>
+      </div>
 
-        {/* links */}
-        <div className="project-links">
-          <a
-            href={project.live}
-            className={`flex items-center gap-1.5 font-[var(--font-space)] text-[0.72rem] tracking-[0.12em] uppercase no-underline transition-colors duration-300 ${hovered ? 'text-green-500' : 'text-white/40'}`}
-          >
-            Live <ArrowUpRight size={13} />
-          </a>
-          <a
-            href={project.github}
-            className="flex items-center gap-1.5 font-[var(--font-space)] text-[0.72rem] tracking-[0.12em] uppercase text-white/25 no-underline transition-colors duration-300 hover:text-white/70"
-          >
-            Code <GitFork size={13} />
-          </a>
-        </div>
-
+      {/* links */}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+        alignItems: 'flex-end',
+        paddingTop: '4px',
+      }}>
+        <a
+          href={project.live}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontFamily: 'var(--font-space)',
+            fontSize: '0.72rem',
+            letterSpacing: '0.12em',
+            color: hovered ? '#22c55e' : '#555',
+            textDecoration: 'none',
+            transition: 'color 0.3s',
+            textTransform: 'uppercase',
+          }}
+        >
+          Live <ArrowUpRight size={13} />
+        </a>
+        <a
+          href={project.github}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontFamily: 'var(--font-space)',
+            fontSize: '0.72rem',
+            letterSpacing: '0.12em',
+            color: '#333',
+            textDecoration: 'none',
+            transition: 'color 0.3s',
+            textTransform: 'uppercase',
+          }}
+          onMouseEnter={e => e.currentTarget.style.color = '#888'}
+          onMouseLeave={e => e.currentTarget.style.color = '#333'}
+        >
+          Code <GitFork size={13} />
+        </a>
       </div>
     </div>
   )
@@ -115,30 +189,59 @@ function ProjectRow({ project, delay }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="bg-black py-24 px-6 md:px-12">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="projects" style={{ background: '#0a0f0a', padding: '100px 48px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* header */}
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/[0.07] pb-7 mb-0">
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          paddingBottom: '28px',
+          marginBottom: '0',
+          flexWrap: 'wrap',
+          gap: '16px',
+        }}>
           <div>
-            <span className="block font-[var(--font-space)] text-[0.68rem] tracking-[0.22em] uppercase text-green-500 mb-2.5">
+            <span style={{
+              color: '#22c55e',
+              fontSize: '0.68rem',
+              letterSpacing: '0.22em',
+              fontFamily: 'var(--font-space)',
+              display: 'block',
+              marginBottom: '10px',
+              textTransform: 'uppercase',
+            }}>
               03 — Projects
             </span>
-            <h2 className="font-[var(--font-jevena)] font-bold text-[clamp(2.4rem,5vw,4rem)] text-[#e8e4dc] tracking-[-0.02em] leading-[0.95]">
+            <h2 style={{
+              fontFamily: 'var(--font-jevena)',
+              color: '#e8e4dc',
+              fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+              fontWeight: 700,
+              lineHeight: 0.95,
+              letterSpacing: '-0.02em',
+            }}>
               Projets
             </h2>
           </div>
-          <p className="font-[var(--font-space)] text-[0.8rem] tracking-[0.05em] text-white/25">
+          <p style={{
+            fontFamily: 'var(--font-space)',
+            color: '#444',
+            fontSize: '0.8rem',
+            letterSpacing: '0.05em',
+          }}>
             {projects.length} projets sélectionnés
           </p>
         </div>
 
-        {/* rows */}
+        {/* project rows */}
         <div>
           {projects.map((p, i) => (
             <ProjectRow key={p.num} project={p} delay={i * 100} />
           ))}
-          <div className="border-t border-white/[0.07]" />
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }} />
         </div>
 
       </div>

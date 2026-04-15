@@ -37,33 +37,83 @@ function RevealItem({ children, delay = 0 }) {
 
 export default function About() {
   return (
-    <section id="about" className="bg-black py-24 px-6 md:px-12">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="about" style={{ background: '#0a0f0a', padding: '100px 48px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
-        {/* header */}
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/[0.07] pb-7 mb-20">
+        {/* header row */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          paddingBottom: '28px',
+          marginBottom: '80px',
+          flexWrap: 'wrap',
+          gap: '16px',
+        }}>
           <div>
-            <span className="block font-[var(--font-space)] text-[0.68rem] tracking-[0.22em] uppercase text-green-500 mb-2.5">
+            <span style={{
+              color: '#22c55e',
+              fontSize: '0.68rem',
+              letterSpacing: '0.22em',
+              fontFamily: 'var(--font-space)',
+              display: 'block',
+              marginBottom: '10px',
+              textTransform: 'uppercase',
+            }}>
               01 — About
             </span>
-            <h2 className="font-[var(--font-jevena)] font-bold text-[clamp(2.4rem,5vw,4rem)] text-[#e8e4dc] tracking-[-0.02em] leading-[0.95]">
+            <h2 style={{
+              fontFamily: 'var(--font-jevena)',
+              color: '#e8e4dc',
+              fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+              fontWeight: 700,
+              lineHeight: 0.95,
+              letterSpacing: '-0.02em',
+            }}>
               À propos
             </h2>
           </div>
-          <p className="font-[var(--font-space)] text-[0.8rem] tracking-[0.05em] text-white/25">
+          <p style={{
+            fontFamily: 'var(--font-space)',
+            color: '#444',
+            fontSize: '0.8rem',
+            letterSpacing: '0.05em',
+          }}>
             Cotonou, Bénin · Disponible
           </p>
         </div>
 
         {/* intro */}
         <RevealItem delay={100}>
-          <div className="about-grid grid grid-cols-[1fr_1.6fr] gap-20 mb-20 items-start">
-            <p className="font-[var(--font-space)] text-[0.82rem] tracking-[0.18em] uppercase leading-[1.6] text-white/50 pt-1.5">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1.6fr',
+            gap: '80px',
+            marginBottom: '80px',
+            alignItems: 'start',
+          }}
+          className="about-grid"
+          >
+            <p style={{
+              fontFamily: 'var(--font-space)',
+              color: '#888',
+              fontSize: '0.82rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              lineHeight: 1.6,
+              paddingTop: '6px',
+            }}>
               Développeur Web<br />Full-Stack
             </p>
-            <p className="font-[var(--font-space)] text-[1.1rem] leading-[1.75] text-[#b0aca6]">
-              Passionné par la création d'expériences numériques modernes et performantes.
-              Je combine maîtrise technique et sensibilité design pour livrer des produits
+            <p style={{
+              fontFamily: 'var(--font-space)',
+              color: '#b0aca6',
+              fontSize: '1.1rem',
+              lineHeight: 1.75,
+            }}>
+              Passionné par la création d'expériences numériques modernes et performantes. 
+              Je combine maîtrise technique et sensibilité design pour livrer des produits 
               qui font la différence — du concept à la mise en production.
             </p>
           </div>
@@ -73,32 +123,68 @@ export default function About() {
         <div>
           {expertise.map(({ label, title, text, stack }, i) => (
             <RevealItem key={label} delay={200 + i * 150}>
-              <div className="expertise-row grid grid-cols-[0.4fr_1fr_0.8fr] gap-12 py-10 border-t border-white/[0.07] items-start">
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '0.4fr 1fr 0.8fr',
+                  gap: '48px',
+                  padding: '40px 0',
+                  borderTop: '1px solid rgba(255,255,255,0.07)',
+                  alignItems: 'start',
+                  transition: 'background 0.3s ease',
+                  cursor: 'default',
+                }}
+                className="expertise-row"
+              >
                 <div>
-                  <span className="block font-[var(--font-space)] text-[0.68rem] tracking-[0.2em] uppercase text-green-500 mb-3">
+                  <span style={{
+                    fontFamily: 'var(--font-space)',
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.2em',
+                    color: '#22c55e',
+                    textTransform: 'uppercase',
+                    display: 'block',
+                    marginBottom: '12px',
+                  }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="font-[var(--font-jevena)] font-bold text-[1.4rem] tracking-[-0.01em] text-[#e8e4dc]">
+                  <h3 style={{
+                    fontFamily: 'var(--font-jevena)',
+                    color: '#e8e4dc',
+                    fontSize: '1.4rem',
+                    fontWeight: 700,
+                    letterSpacing: '-0.01em',
+                  }}>
                     {title}
                   </h3>
                 </div>
-                <p className="font-[var(--font-space)] text-[0.92rem] leading-[1.7] text-white/50 pt-0.5">
+                <p style={{
+                  fontFamily: 'var(--font-space)',
+                  color: '#888',
+                  fontSize: '0.92rem',
+                  lineHeight: 1.7,
+                  paddingTop: '2px',
+                }}>
                   {text}
                 </p>
-                <div className="flex flex-wrap gap-2 pt-1">
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', paddingTop: '4px' }}>
                   {stack.map(s => (
-                    <span
-                      key={s}
-                      className="font-[var(--font-space)] text-[0.68rem] tracking-[0.12em] uppercase text-white/35 border border-white/[0.08] rounded-full px-3 py-1.5 skill-badge"
-                    >
-                      {s}
-                    </span>
+                    <span key={s} style={{
+                      fontFamily: 'var(--font-space)',
+                      fontSize: '0.68rem',
+                      letterSpacing: '0.12em',
+                      color: '#555',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      padding: '5px 12px',
+                      borderRadius: '999px',
+                      textTransform: 'uppercase',
+                    }}>{s}</span>
                   ))}
                 </div>
               </div>
             </RevealItem>
           ))}
-          <div className="border-t border-white/[0.07]" />
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }} />
         </div>
 
       </div>

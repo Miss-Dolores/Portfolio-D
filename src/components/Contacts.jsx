@@ -8,9 +8,23 @@ const socialLinks = [
   { icon: X,       label: 'Twitter',  href: '#' },
 ]
 
+const inputBase = {
+  background: 'transparent',
+  border: 'none',
+  borderBottom: '1px solid rgba(255,255,255,0.12)',
+  color: '#e8e4dc',
+  fontFamily: 'var(--font-space)',
+  fontSize: '0.95rem',
+  outline: 'none',
+  width: '100%',
+  padding: '14px 0',
+  transition: 'border-color 0.25s ease',
+  borderRadius: 0,
+}
+
 export default function Contacts() {
-  const [form,  setForm]  = useState({ name: '', email: '', message: '' })
-  const [sent,  setSent]  = useState(false)
+  const [form, setForm]   = useState({ name: '', email: '', message: '' })
+  const [sent, setSent]   = useState(false)
   const [focus, setFocus] = useState(null)
 
   const handleChange = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }))
@@ -21,71 +35,150 @@ export default function Contacts() {
     setTimeout(() => setSent(false), 4000)
   }
 
-  const inputClass = (name) =>
-    `w-full bg-transparent border-0 border-b py-3.5 font-[var(--font-space)] text-[0.95rem] text-[#e8e4dc] outline-none rounded-none transition-colors duration-250 placeholder:text-white/20 ${
-      focus === name ? 'border-green-500' : 'border-white/[0.12]'
-    }`
+  const fieldStyle = name => ({
+    ...inputBase,
+    borderBottomColor: focus === name ? '#22c55e' : 'rgba(255,255,255,0.12)',
+  })
 
   return (
-    <section id="contacts" className="bg-black py-24 px-6 md:px-12 pb-20">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="contacts" style={{ background: '#0a0f0a', padding: '100px 48px 80px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* header */}
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/[0.07] pb-7 mb-20">
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          paddingBottom: '28px',
+          marginBottom: '80px',
+          flexWrap: 'wrap',
+          gap: '16px',
+        }}>
           <div>
-            <span className="block font-[var(--font-space)] text-[0.68rem] tracking-[0.22em] uppercase text-green-500 mb-2.5">
+            <span style={{
+              color: '#22c55e',
+              fontSize: '0.68rem',
+              letterSpacing: '0.22em',
+              fontFamily: 'var(--font-space)',
+              display: 'block',
+              marginBottom: '10px',
+              textTransform: 'uppercase',
+            }}>
               04 — Contact
             </span>
-            <h2 className="font-[var(--font-jevena)] font-bold text-[clamp(2.4rem,5vw,4rem)] text-[#e8e4dc] tracking-[-0.02em] leading-[0.95]">
+            <h2 style={{
+              fontFamily: 'var(--font-jevena)',
+              color: '#e8e4dc',
+              fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+              fontWeight: 700,
+              lineHeight: 0.95,
+              letterSpacing: '-0.02em',
+            }}>
               Travaillons<br />ensemble
             </h2>
           </div>
-          <p className="font-[var(--font-space)] text-[0.8rem] tracking-[0.05em] text-white/25 max-w-[220px] text-right leading-[1.6]">
+          <p style={{
+            fontFamily: 'var(--font-space)',
+            color: '#444',
+            fontSize: '0.8rem',
+            letterSpacing: '0.05em',
+            maxWidth: '220px',
+            textAlign: 'right',
+            lineHeight: 1.6,
+          }}>
             Une idée ? Un projet ?<br />N'hésitez pas à écrire.
           </p>
         </div>
 
         {/* two-column */}
-        <div className="contact-grid grid grid-cols-[1fr_1.4fr] gap-24 items-start">
-
-          {/* left */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1.4fr',
+          gap: '100px',
+          alignItems: 'start',
+        }}
+        className="contact-grid"
+        >
+          {/* left: CTA + socials */}
           <div>
-            <p className="font-[var(--font-space)] text-[0.9rem] leading-[1.75] text-white/50 mb-12">
+            <p style={{
+              fontFamily: 'var(--font-space)',
+              color: '#888',
+              fontSize: '0.9rem',
+              lineHeight: 1.75,
+              marginBottom: '48px',
+            }}>
               Je suis disponible pour des missions freelance, des collaborations créatives ou un poste à plein temps.
             </p>
 
             <a
               href="mailto:dolores@example.com"
-              className="group inline-flex items-center gap-2 font-[var(--font-jevena)] text-[1.1rem] text-[#e8e4dc] no-underline border-b border-white/15 pb-1 mb-16 transition-all duration-250 hover:text-green-500 hover:border-green-500"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontFamily: 'var(--font-jevena)',
+                fontSize: '1.1rem',
+                color: '#e8e4dc',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(255,255,255,0.15)',
+                paddingBottom: '4px',
+                marginBottom: '64px',
+                transition: 'color 0.25s, border-color 0.25s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#22c55e'; e.currentTarget.style.borderBottomColor = '#22c55e' }}
+              onMouseLeave={e => { e.currentTarget.style.color = '#e8e4dc'; e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.15)' }}
             >
               dolores@example.com <ArrowUpRight size={16} />
             </a>
 
-            <div className="flex flex-col">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
               {socialLinks.map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
-                  className="flex items-center justify-between py-4 border-t border-white/[0.07] font-[var(--font-space)] text-[0.8rem] tracking-[0.1em] uppercase text-white/35 no-underline transition-colors duration-250 hover:text-white"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '16px 0',
+                    borderTop: '1px solid rgba(255,255,255,0.07)',
+                    fontFamily: 'var(--font-space)',
+                    fontSize: '0.8rem',
+                    letterSpacing: '0.1em',
+                    color: '#555',
+                    textDecoration: 'none',
+                    transition: 'color 0.25s',
+                    textTransform: 'uppercase',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#e8e4dc'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#555'}
                 >
-                  <span className="flex items-center gap-3">
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <Icon size={14} />
                     {label}
                   </span>
                   <ArrowUpRight size={13} />
                 </a>
               ))}
-              <div className="border-t border-white/[0.07]" />
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }} />
             </div>
           </div>
 
           {/* right: form */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-10">
-            <div className="grid grid-cols-2 gap-8">
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
               <div>
-                <label className="block font-[var(--font-space)] text-[0.62rem] tracking-[0.2em] uppercase text-white/25 mb-2">
-                  Nom
-                </label>
+                <label style={{
+                  display: 'block',
+                  fontFamily: 'var(--font-space)',
+                  fontSize: '0.62rem',
+                  letterSpacing: '0.2em',
+                  color: '#444',
+                  textTransform: 'uppercase',
+                  marginBottom: '8px',
+                }}>Nom</label>
                 <input
                   type="text"
                   name="name"
@@ -93,15 +186,21 @@ export default function Contacts() {
                   onChange={handleChange}
                   placeholder="Votre nom"
                   required
-                  className={inputClass('name')}
+                  style={fieldStyle('name')}
                   onFocus={() => setFocus('name')}
                   onBlur={() => setFocus(null)}
                 />
               </div>
               <div>
-                <label className="block font-[var(--font-space)] text-[0.62rem] tracking-[0.2em] uppercase text-white/25 mb-2">
-                  Email
-                </label>
+                <label style={{
+                  display: 'block',
+                  fontFamily: 'var(--font-space)',
+                  fontSize: '0.62rem',
+                  letterSpacing: '0.2em',
+                  color: '#444',
+                  textTransform: 'uppercase',
+                  marginBottom: '8px',
+                }}>Email</label>
                 <input
                   type="email"
                   name="email"
@@ -109,7 +208,7 @@ export default function Contacts() {
                   onChange={handleChange}
                   placeholder="votre@email.com"
                   required
-                  className={inputClass('email')}
+                  style={fieldStyle('email')}
                   onFocus={() => setFocus('email')}
                   onBlur={() => setFocus(null)}
                 />
@@ -117,9 +216,15 @@ export default function Contacts() {
             </div>
 
             <div>
-              <label className="block font-[var(--font-space)] text-[0.62rem] tracking-[0.2em] uppercase text-white/25 mb-2">
-                Message
-              </label>
+              <label style={{
+                display: 'block',
+                fontFamily: 'var(--font-space)',
+                fontSize: '0.62rem',
+                letterSpacing: '0.2em',
+                color: '#444',
+                textTransform: 'uppercase',
+                marginBottom: '8px',
+              }}>Message</label>
               <textarea
                 name="message"
                 value={form.message}
@@ -127,7 +232,7 @@ export default function Contacts() {
                 placeholder="Décrivez votre projet..."
                 required
                 rows={5}
-                className={`${inputClass('message')} resize-none`}
+                style={{ ...fieldStyle('message'), resize: 'none' }}
                 onFocus={() => setFocus('message')}
                 onBlur={() => setFocus(null)}
               />
@@ -136,7 +241,23 @@ export default function Contacts() {
             <div>
               <button
                 type="submit"
-                className={`inline-flex items-center gap-2.5 font-[var(--font-space)] text-[0.78rem] tracking-[0.15em] uppercase border border-green-500 px-8 py-3.5 cursor-pointer transition-all duration-300 ${sent ? 'text-green-500 bg-transparent' : 'text-black bg-green-500 hover:bg-transparent hover:text-green-500'}`}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  fontFamily: 'var(--font-space)',
+                  fontSize: '0.78rem',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  color: sent ? '#22c55e' : '#0a0f0a',
+                  background: sent ? 'transparent' : '#22c55e',
+                  border: '1px solid #22c55e',
+                  padding: '14px 32px',
+                  cursor: 'pointer',
+                  transition: 'background 0.3s, color 0.3s',
+                }}
+                onMouseEnter={e => { if (!sent) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#22c55e' } }}
+                onMouseLeave={e => { if (!sent) { e.currentTarget.style.background = '#22c55e'; e.currentTarget.style.color = '#0a0f0a' } }}
               >
                 <ArrowUpRight size={15} />
                 {sent ? 'Message envoyé !' : 'Envoyer'}
@@ -146,11 +267,20 @@ export default function Contacts() {
         </div>
 
         {/* footer */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.07] mt-24 pt-7">
-          <span className="font-[var(--font-space)] text-[0.72rem] tracking-[0.08em] text-white/20">
+        <div style={{
+          borderTop: '1px solid rgba(255,255,255,0.07)',
+          marginTop: '100px',
+          paddingTop: '28px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '12px',
+        }}>
+          <span style={{ fontFamily: 'var(--font-space)', fontSize: '0.72rem', color: '#333', letterSpacing: '0.08em' }}>
             © 2025 Dolores Vlafonou
           </span>
-          <span className="font-[var(--font-space)] text-[0.72rem] tracking-[0.08em] text-white/20">
+          <span style={{ fontFamily: 'var(--font-space)', fontSize: '0.72rem', color: '#333', letterSpacing: '0.08em' }}>
             Conçu & développé avec soin
           </span>
         </div>

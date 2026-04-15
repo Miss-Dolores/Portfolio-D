@@ -1,16 +1,16 @@
 import { Palette, Server, Atom, FileCode2, Braces, Wind, GitBranch, Zap, Globe, GitFork } from 'lucide-react'
 
 const allSkills = [
-  { label: 'CSS',         icon: Palette },
-  { label: 'Node.js',     icon: Server },
-  { label: 'React',       icon: Atom },
-  { label: 'HTML',        icon: FileCode2 },
-  { label: 'JavaScript',  icon: Braces },
-  { label: 'Tailwind CSS',icon: Wind },
-  { label: 'Git',         icon: GitBranch },
-  { label: 'Vite',        icon: Zap },
-  { label: 'Netlify',     icon: Globe },
-  { label: 'GitHub',      icon: GitFork },
+  { label: 'CSS', icon: Palette },
+  { label: 'Node.js', icon: Server },
+  { label: 'React', icon: Atom },
+  { label: 'HTML', icon: FileCode2 },
+  { label: 'JavaScript', icon: Braces },
+  { label: 'Tailwind CSS', icon: Wind },
+  { label: 'Git', icon: GitBranch },
+  { label: 'Vite', icon: Zap },
+  { label: 'Netlify', icon: Globe },
+  { label: 'GitHub', icon: GitFork },
 ]
 
 const row1 = allSkills.slice(0, 5)
@@ -18,8 +18,25 @@ const row2 = allSkills.slice(5)
 
 function SkillBadge({ label, icon: Icon }) {
   return (
-    <div className="skill-badge flex items-center gap-2.5 px-7 py-3 mx-2.5 whitespace-nowrap border border-white/[0.07] font-[var(--font-space)] text-[0.82rem] tracking-[0.08em] text-white/50 cursor-default transition-all duration-300">
-      <Icon size={14} className="text-green-500 shrink-0" />
+    <div
+      className="skill-badge"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        padding: '12px 28px',
+        margin: '0 10px',
+        whiteSpace: 'nowrap',
+        border: '1px solid rgba(255,255,255,0.07)',
+        fontFamily: 'var(--font-space)',
+        color: '#888',
+        fontSize: '0.82rem',
+        letterSpacing: '0.08em',
+        cursor: 'default',
+        transition: 'border-color 0.3s, color 0.3s',
+      }}
+    >
+      <Icon size={14} style={{ color: '#22c55e', flexShrink: 0 }} />
       {label}
     </div>
   )
@@ -27,9 +44,9 @@ function SkillBadge({ label, icon: Icon }) {
 
 function MarqueeRow({ skills, direction = 'left', speed = '35s' }) {
   const items = [...skills, ...skills, ...skills, ...skills]
-  const cls   = direction === 'left' ? 'marquee-track-left' : 'marquee-track-right'
+  const cls = direction === 'left' ? 'marquee-track-left' : 'marquee-track-right'
   return (
-    <div className="marquee-wrapper overflow-hidden pb-px">
+    <div className="marquee-wrapper" style={{ overflow: 'hidden', paddingBottom: '1px' }}>
       <div className={cls} style={{ animationDuration: speed }}>
         {items.map((s, i) => (
           <SkillBadge key={`${s.label}-${i}`} {...s} />
@@ -41,31 +58,60 @@ function MarqueeRow({ skills, direction = 'left', speed = '35s' }) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="bg-black py-24">
+    <section id="skills" style={{ background: '#0a0f0a', padding: '100px 0' }}>
 
       {/* header */}
-      <div className="px-6 md:px-12 max-w-[1100px] mx-auto">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/[0.07] pb-7 mb-18">
+      <div style={{ padding: '0 48px', maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          paddingBottom: '28px',
+          marginBottom: '72px',
+          flexWrap: 'wrap',
+          gap: '16px',
+        }}>
           <div>
-            <span className="block font-[var(--font-space)] text-[0.68rem] tracking-[0.22em] uppercase text-green-500 mb-2.5">
+            <span style={{
+              color: '#22c55e',
+              fontSize: '0.68rem',
+              letterSpacing: '0.22em',
+              fontFamily: 'var(--font-space)',
+              display: 'block',
+              marginBottom: '10px',
+              textTransform: 'uppercase',
+            }}>
               02 — Skills
             </span>
-            <h2 className="font-[var(--font-jevena)] font-bold text-[clamp(2.4rem,5vw,4rem)] text-[#e8e4dc] tracking-[-0.02em] leading-[0.95]">
+            <h2 style={{
+              fontFamily: 'var(--font-jevena)',
+              color: '#e8e4dc',
+              fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+              fontWeight: 700,
+              lineHeight: 0.95,
+              letterSpacing: '-0.02em',
+            }}>
               Compétences
             </h2>
           </div>
-          <p className="font-[var(--font-space)] text-[0.8rem] tracking-[0.05em] text-white/25">
+          <p style={{
+            fontFamily: 'var(--font-space)',
+            color: '#444',
+            fontSize: '0.8rem',
+            letterSpacing: '0.05em',
+          }}>
             10 technologies
           </p>
         </div>
       </div>
 
       {/* marquee rows */}
-      <div className="flex flex-col">
-        <div className="border-t border-b border-white/[0.07] py-1">
-          <MarqueeRow skills={row1} direction="left"  speed="28s" />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', borderBottom: '1px solid rgba(255,255,255,0.07)', padding: '4px 0' }}>
+          <MarqueeRow skills={row1} direction="left" speed="28s" />
         </div>
-        <div className="border-b border-white/[0.07] py-1">
+        <div style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', padding: '4px 0' }}>
           <MarqueeRow skills={row2} direction="right" speed="22s" />
         </div>
       </div>
