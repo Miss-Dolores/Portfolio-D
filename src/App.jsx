@@ -2,9 +2,11 @@ import { useState, useRef, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import WhatIBuild from './components/WhatIBuild'
+import WhyMe from './components/WhyMe'
 import About from './components/About'
-import Skills from './components/Skills'
 import Projects from './components/Projects'
+import FAQ from './components/FAQ'
+import Skills from './components/Skills'
 import Contacts from './components/Contacts'
 
 export default function App() {
@@ -31,7 +33,7 @@ export default function App() {
   }
 
   useEffect(() => {
-    const sections = ['hero', 'about', 'skills', 'projects', 'contacts']
+    const sections = ['hero', 'whatibuild', 'whyme', 'about', 'projects', 'faq', 'skills', 'contacts']
     const observers = sections.map((id) => {
       const el = document.getElementById(id)
       if (!el) return null
@@ -51,9 +53,11 @@ export default function App() {
       <div ref={contentRef} className="page-fade-in">
         <Hero onContactClick={() => handleNavClick('#contacts')} />
         <WhatIBuild />
+        <WhyMe />
         <About />
-        <Skills />
         <Projects />
+        <FAQ />
+        <Skills />
         <Contacts />
       </div>
     </div>
