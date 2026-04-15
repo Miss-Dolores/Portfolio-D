@@ -1,0 +1,175 @@
+Build a modern, sleek portfolio website as a React single-page application 
+for a full-stack web developer named DOLORES VLAFONOU.
+
+=============================================================
+🛠️ TECH STACK
+=============================================================
+- React (with Vite)
+- Tailwind CSS for styling
+- Lucide React for all icons
+- Pure CSS animations (no external animation libraries)
+- Google Fonts: Space Grotesk (body/text) + Jevena (titles/headings)
+
+=============================================================
+🎨 DESIGN SYSTEM
+=============================================================
+Font - Body/Text: "Space Grotesk" (Google Fonts)
+Font - Titles/Headings: "Jevena" (sans-serif, Google Fonts)
+
+Color Palette (strictly apply these):
+  - Background:      #0a0f0a  (deep black-green)
+  - Surface/Cards:   #0f1a0f  (dark green-black)
+  - Border:          #1a2e1a
+  - Primary accent:  #22c55e  (vibrant green)
+  - Secondary:       #ffffff  (white)
+  - Text primary:    #f0f5f0
+  - Text muted:      #6b7c6b
+  - Gradient:        from #22c55e to #ffffff
+
+=============================================================
+📐 SECTIONS & FEATURES
+=============================================================
+
+── 1. NAVBAR (fixed, top) ──────────────────────────────────
+- Logo left: "DS Dev" in accent green, bold
+- Nav links right: About | Skills | Projects | Contacts
+  → each link uses Lucide React icons beside the label
+- Active link highlighted in green
+- Backdrop blur background on scroll
+- PAGE TRANSITION: when clicking a nav link, animate a 
+  smooth fade + slight translateY transition before 
+  scrolling to the section (use CSS keyframes + JS class toggle)
+
+── 2. HERO (full viewport height) ──────────────────────────
+- Animated typing effect cycling through:
+  "Developpeur web full-stack"
+  "UI/UX Enthusiast"
+  "React Developer"
+- Name: DOLORES VLAFONOU
+  → Large, bold, gradient text (green → white)
+  → Font: Jevena
+- Subtitle (Space Grotesk):
+  "Je crée des interfaces modernes, fluides et centrées 
+   sur l'expérience utilisateur."
+- CTA button: "Contactez-moi"
+  → HOVER EFFECT: background fills from left (slide-in), 
+    green border glow, slight scale up, smooth 0.3s transition
+- Subtle animated background: floating green particles 
+  or a soft grid pattern
+
+── 3. ABOUT ────────────────────────────────────────────────
+- Section title: "About" (Jevena, large)
+- Two cards side by side (responsive → stacks on mobile):
+
+  Card 1 — "Developpeur front-end"
+  Icon: Lucide <Monitor /> in green
+  Text: "Je suis un développeur front-end passionné qui 
+  maîtrise les technologies web modernes telles que HTML, 
+  CSS et JavaScript. Mon objectif est de transformer les 
+  idées en réalités pour offrir des sites web attrayants 
+  et performants."
+
+  Card 2 — "Developpeur back-end"
+  Icon: Lucide <Server /> in green
+  Text: "En tant que développeur back-end, je suis 
+  spécialisé dans la création de la logique serveur et 
+  la gestion des bases de données pour assurer le bon 
+  fonctionnement des applications web."
+
+- Cards: glassmorphism style, green border on hover, 
+  smooth lift on hover (translateY + box-shadow)
+
+── 4. SKILLS ────────────────────────────────────────────────
+- Section title: "Skills" (Jevena)
+- MARQUEE (infinite auto-scrolling ticker, left to right 
+  AND a second row right to left):
+  Display these tools as pill badges with their Lucide 
+  icon or a styled abbreviation:
+  CSS | Node.js | React | HTML | JavaScript | 
+  Tailwind CSS | Git | Vite | Netlify | GitHub
+  → Each badge: dark card, green accent border, 
+    Space Grotesk font
+  → Marquee duplicates content seamlessly (CSS animation)
+  → Pause on hover
+
+── 5. PROJECTS ──────────────────────────────────────────────
+- Section title: "Projects" (Jevena)
+- Display 3 placeholder project cards in a responsive grid
+- STAGGERED LOAD ANIMATION:
+  When the section enters the viewport (IntersectionObserver),
+  each card animates in with a staggered delay:
+  card 1 → 0ms, card 2 → 150ms, card 3 → 300ms
+  Animation: fade in + translateY(30px → 0)
+- Each project card contains:
+  → Project title
+  → Short description placeholder
+  → Tech tags (green pills)
+  → Two buttons: "Live" (Lucide <ExternalLink />) 
+    and "GitHub" (Lucide <Github />)
+  → HOVER EFFECT on buttons: green glow border, 
+    background slide-in fill, scale 1.05
+
+── 6. CONTACTS ──────────────────────────────────────────────
+- Section title: "Contacts" (Jevena)
+- Contact form with fields: Name | Email | Message
+  → Input focus: green glow border effect
+- Submit button with same hover effect as hero CTA
+- Below form, social links row with Lucide icons:
+  GitHub <Github /> | LinkedIn <Linkedin /> | 
+  Email <Mail /> | Twitter/X <Twitter />
+  → HOVER EFFECT: icon scales up + turns green + 
+    soft glow
+
+=============================================================
+✨ GLOBAL INTERACTIONS & ANIMATIONS
+=============================================================
+
+PAGE TRANSITIONS:
+- On nav link click → trigger a CSS class that runs:
+  opacity: 1→0 + translateY(0→-10px) in 250ms
+  then scroll to section
+  then reverse: opacity: 0→1 + translateY(10px→0)
+- Implement with useRef + className toggling in React
+
+HOVER EFFECTS (all buttons):
+- Sliding background fill (::before pseudo via inline style 
+  or Tailwind arbitrary)
+- Green border glow (box-shadow: 0 0 12px #22c55e)
+- Scale: 1 → 1.05
+- Duration: 0.3s ease
+
+STAGGERED LOAD (Projects):
+- Use IntersectionObserver in a useEffect hook
+- Add CSS custom property --delay per card
+- Animate: opacity 0→1 + transform translateY(30px→0)
+
+MARQUEE (Skills):
+- Pure CSS @keyframes marquee animation
+- Two rows scrolling in opposite directions
+- Duplicate skill list for seamless loop
+- Pause animation on hover (animation-play-state: paused)
+
+=============================================================
+📱 RESPONSIVE
+=============================================================
+- Fully responsive: mobile first
+- Navbar collapses to hamburger menu on mobile 
+  (Lucide <Menu /> / <X /> icons)
+- Cards stack vertically on small screens
+- Marquee adapts speed on mobile
+
+=============================================================
+📁 FILE STRUCTURE
+=============================================================
+src/
+  components/
+    Navbar.jsx
+    Hero.jsx
+    About.jsx
+    Skills.jsx
+    Projects.jsx
+    Contacts.jsx
+  App.jsx
+  index.css  (Google Fonts import + global styles + 
+               keyframes for marquee & transitions)
+  main.jsx
