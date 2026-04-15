@@ -8,7 +8,7 @@ const navLinks = [
   { label: 'Contacts', icon: Mail, href: '#contacts' },
 ]
 
-export default function Navbar({ onNavClick, activeSection }) {
+export default function Navbar({ onNavClick, activeSection, lightBg }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -23,13 +23,26 @@ export default function Navbar({ onNavClick, activeSection }) {
     setMenuOpen(false)
   }
 
+  const textColor = lightBg ? '#0d0d0d' : '#f0f5f0'
+  const mutedColor = lightBg ? '#888' : '#6b7c6b'
+  const navBg = scrolled
+    ? lightBg
+      ? 'rgba(240,235,224,0.9)'
+      : 'rgba(10,15,10,0.88)'
+    : 'transparent'
+  const navBorder = scrolled
+    ? lightBg
+      ? '1px solid rgba(0,0,0,0.08)'
+      : '1px solid #1a2e1a'
+    : 'none'
+
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? 'rgba(10,15,10,0.85)' : 'transparent',
+        background: navBg,
         backdropFilter: scrolled ? 'blur(14px)' : 'none',
-        borderBottom: scrolled ? '1px solid #1a2e1a' : 'none',
+        borderBottom: navBorder,
       }}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -48,24 +61,18 @@ export default function Navbar({ onNavClick, activeSection }) {
               <li key={label}>
                 <button
                   onClick={() => handleClick(href)}
-                  className="flex items-center gap-2 text-sm font-medium transition-all duration-200 hover:text-[#22c55e] group"
+                  className="flex items-center gap-2 text-sm font-medium transition-all duration-200 group"
                   style={{
                     fontFamily: 'var(--font-space)',
-                    color: isActive ? '#22c55e' : '#f0f5f0',
+                    color: isActive ? '#22c55e' : textColor,
                   }}
                 >
                   <Icon
                     size={15}
-                    style={{ color: isActive ? '#22c55e' : '#6b7c6b' }}
-                    className="transition-colors duration-200 group-hover:text-[#22c55e]"
+                    style={{ color: isActive ? '#22c55e' : mutedColor }}
+                    className="transition-colors duration-200"
                   />
                   {label}
-                  {isActive && (
-                    <span
-                      className="absolute bottom-0 left-0 w-full h-0.5 rounded-full"
-                      style={{ backgroundColor: '#22c55e' }}
-                    />
-                  )}
                 </button>
               </li>
             )
@@ -74,7 +81,7 @@ export default function Navbar({ onNavClick, activeSection }) {
 
         <button
           className="md:hidden transition-colors duration-200 hover:text-[#22c55e]"
-          style={{ color: '#f0f5f0' }}
+          style={{ color: textColor }}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -85,7 +92,10 @@ export default function Navbar({ onNavClick, activeSection }) {
       {menuOpen && (
         <div
           className="md:hidden px-6 py-4"
-          style={{ background: '#0f1a0f', borderTop: '1px solid #1a2e1a' }}
+          style={{
+            background: lightBg ? '#f0ebe0' : '#0f1a0f',
+            borderTop: lightBg ? '1px solid rgba(0,0,0,0.08)' : '1px solid #1a2e1a',
+          }}
         >
           <ul className="flex flex-col gap-4">
             {navLinks.map(({ label, icon: Icon, href }) => {
@@ -97,10 +107,10 @@ export default function Navbar({ onNavClick, activeSection }) {
                     className="flex items-center gap-3 text-sm font-medium w-full transition-colors duration-200 hover:text-[#22c55e]"
                     style={{
                       fontFamily: 'var(--font-space)',
-                      color: isActive ? '#22c55e' : '#f0f5f0',
+                      color: isActive ? '#22c55e' : textColor,
                     }}
                   >
-                    <Icon size={16} style={{ color: isActive ? '#22c55e' : '#6b7c6b' }} />
+                    <Icon size={16} style={{ color: isActive ? '#22c55e' : mutedColor }} />
                     {label}
                   </button>
                 </li>
