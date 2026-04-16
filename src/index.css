@@ -39,7 +39,7 @@ body {
   padding: 120px 48px 56px;
 }
 @media (max-width: 640px) {
-  .hero-container { padding: 96px 24px 40px; }
+  .hero-container { padding: 108px 24px 40px; }
   .hero-name-wrapper { flex: 0 !important; margin: 12px 0 10px !important; justify-content: flex-start !important; }
 }
 
@@ -153,6 +153,20 @@ body {
   align-items: flex-end;
   padding-top: 4px;
   flex-shrink: 0;
+}
+
+/* ── Navbar ──────────────────────────────────────── */
+.navbar-inner {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .navbar-inner { padding: 24px 24px; }
 }
 
 /* ── Responsive ──────────────────────────────────── */
