@@ -97,7 +97,7 @@ export default function About() {
           >
             <div style={{ position: 'relative' }}>
               <img
-                src="/dolores.png"
+                src="/dolores.webp"
                 alt="Dolores Vlafonou"
                 style={{
                   width: '100%',

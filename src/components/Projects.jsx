@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, GitFork } from 'lucide-react'
+import { ExternalLink, GitFork } from 'lucide-react'
 
 const projects = [
   {
     num: '01',
-    title: 'E-Commerce Dashboard',
-    description: 'Application de gestion e-commerce avec tableau de bord analytique, gestion des stocks et suivi des commandes en temps réel.',
-    tags: ['React', 'Node.js', 'Tailwind CSS'],
+    title: 'Underground Bouge',
+    description: 'Plateforme web pour révéler les talents urbains du Bénin — événements, battles et promotion d\'artistes via une stratégie pull innovante.',
+    tags: ['React', 'Tailwind CSS', 'Vercel'],
     year: '2024',
-    live: '#',
-    github: '#',
+    image: '/underg.webp',
+    live: 'https://underg.vercel.app/',
+    github: 'https://github.com/ange918/underg',
   },
   {
     num: '02',
@@ -17,6 +18,7 @@ const projects = [
     description: 'Site vitrine minimaliste avec animations CSS avancées, design system cohérent et expérience utilisateur optimisée.',
     tags: ['React', 'Vite', 'CSS'],
     year: '2024',
+    image: null,
     live: '#',
     github: '#',
   },
@@ -26,6 +28,7 @@ const projects = [
     description: 'Backend complet pour une plateforme de blogging : authentification JWT, gestion CRUD, base de données PostgreSQL.',
     tags: ['Node.js', 'JavaScript', 'Git'],
     year: '2023',
+    image: null,
     live: '#',
     github: '#',
   },
@@ -60,7 +63,7 @@ function ProjectRow({ project, delay }) {
       style={{
         padding: '40px 0',
         borderTop: '1px solid rgba(255,255,255,0.07)',
-        cursor: 'pointer',
+        cursor: 'default',
         transition: 'opacity 0.3s',
       }}
     >
@@ -102,6 +105,33 @@ function ProjectRow({ project, delay }) {
             </span>
           </div>
 
+          {/* image preview */}
+          {project.image && (
+            <div style={{
+              marginBottom: '20px',
+              borderRadius: '10px',
+              overflow: 'hidden',
+              border: '1px solid rgba(255,255,255,0.08)',
+              maxWidth: '520px',
+              aspectRatio: '16/9',
+              background: '#111',
+            }}>
+              <img
+                src={project.image}
+                alt={project.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'top center',
+                  display: 'block',
+                  transition: 'transform 0.5s ease',
+                  transform: hovered ? 'scale(1.03)' : 'scale(1)',
+                }}
+              />
+            </div>
+          )}
+
           <p style={{
             fontFamily: 'var(--font-space)',
             color: 'rgba(255,255,255,0.45)',
@@ -113,7 +143,7 @@ function ProjectRow({ project, delay }) {
             {project.description}
           </p>
 
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: project.image ? '20px' : '0' }}>
             {project.tags.map(tag => (
               <span key={tag} style={{
                 fontFamily: 'var(--font-space)',
@@ -129,47 +159,105 @@ function ProjectRow({ project, delay }) {
               </span>
             ))}
           </div>
+
+          {/* action buttons for projects with real links */}
+          {project.live !== '#' && (
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '8px' }}>
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontFamily: 'var(--font-space)',
+                  fontSize: '0.72rem',
+                  letterSpacing: '0.12em',
+                  color: '#000000',
+                  textDecoration: 'none',
+                  textTransform: 'uppercase',
+                  background: '#22c55e',
+                  padding: '10px 20px',
+                  borderRadius: '6px',
+                  fontWeight: 600,
+                  transition: 'background 0.2s ease, transform 0.2s ease',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#16a34a'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#22c55e'; e.currentTarget.style.transform = 'translateY(0)' }}
+              >
+                Voir le projet <ExternalLink size={13} />
+              </a>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontFamily: 'var(--font-space)',
+                  fontSize: '0.72rem',
+                  letterSpacing: '0.12em',
+                  color: 'rgba(255,255,255,0.7)',
+                  textDecoration: 'none',
+                  textTransform: 'uppercase',
+                  background: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  padding: '10px 20px',
+                  borderRadius: '6px',
+                  transition: 'border-color 0.2s ease, color 0.2s ease, transform 0.2s ease',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; e.currentTarget.style.transform = 'translateY(0)' }}
+              >
+                GitHub <GitFork size={13} />
+              </a>
+            </div>
+          )}
         </div>
 
-        {/* links */}
-        <div className="project-links">
-          <a
-            href={project.live}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontFamily: 'var(--font-space)',
-              fontSize: '0.72rem',
-              letterSpacing: '0.12em',
-              color: hovered ? '#22c55e' : 'rgba(255,255,255,0.4)',
-              textDecoration: 'none',
-              transition: 'color 0.3s',
-              textTransform: 'uppercase',
-            }}
-          >
-            Live <ArrowUpRight size={13} />
-          </a>
-          <a
-            href={project.github}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontFamily: 'var(--font-space)',
-              fontSize: '0.72rem',
-              letterSpacing: '0.12em',
-              color: 'rgba(255,255,255,0.25)',
-              textDecoration: 'none',
-              transition: 'color 0.3s',
-              textTransform: 'uppercase',
-            }}
-            onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.25)'}
-          >
-            Code <GitFork size={13} />
-          </a>
-        </div>
+        {/* links (for projects without real links) */}
+        {project.live === '#' && (
+          <div className="project-links">
+            <a
+              href={project.live}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontFamily: 'var(--font-space)',
+                fontSize: '0.72rem',
+                letterSpacing: '0.12em',
+                color: hovered ? '#22c55e' : 'rgba(255,255,255,0.4)',
+                textDecoration: 'none',
+                transition: 'color 0.3s',
+                textTransform: 'uppercase',
+              }}
+            >
+              Live <ExternalLink size={13} />
+            </a>
+            <a
+              href={project.github}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontFamily: 'var(--font-space)',
+                fontSize: '0.72rem',
+                letterSpacing: '0.12em',
+                color: 'rgba(255,255,255,0.25)',
+                textDecoration: 'none',
+                transition: 'color 0.3s',
+                textTransform: 'uppercase',
+              }}
+              onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.25)'}
+            >
+              Code <GitFork size={13} />
+            </a>
+          </div>
+        )}
       </div>
     </div>
   )
