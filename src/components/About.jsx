@@ -13,6 +13,12 @@ const expertise = [
     text: 'Spécialisé dans la logique serveur et la gestion des bases de données, je conçois des APIs robustes pour assurer le bon fonctionnement des applications web.',
     stack: ['Node.js', 'REST API', 'PostgreSQL', 'Git'],
   },
+  {
+    label: 'Design',
+    title: 'Designer UI/UX',
+    text: 'Je conçois des interfaces centrées sur l\'utilisateur — maquettes Figma, prototypes interactifs et systèmes de design cohérents. J\'accorde autant d\'importance à l\'esthétique qu\'à l\'ergonomie pour créer des expériences mémorables.',
+    stack: ['Figma', 'Prototypage', 'UX Research', 'Design System'],
+  },
 ]
 
 function RevealItem({ children, delay = 0 }) {

@@ -56,8 +56,8 @@ export default function App() {
         <WhyMe />
         <About />
         <Projects />
-        <FAQ />
         <Skills />
+        <FAQ />
         <Contacts />
       </div>
     </div>

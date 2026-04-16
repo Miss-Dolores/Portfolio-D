@@ -42,8 +42,8 @@ export default function Hero({ onContactClick }) {
       const isMobile = vw < 640
       const isTablet = vw >= 640 && vw < 1024
       // laptop/desktop: scale to 70% width, capped at 160px
-      const scale = isMobile ? 0.58 : isTablet ? 0.65 : 0.70
-      const cap   = isMobile ? 92   : isTablet ? 130  : 160
+      const scale = isMobile ? 0.82 : isTablet ? 0.88 : 0.92
+      const cap   = isMobile ? 130  : isTablet ? 180  : 220
       const hPad  = isMobile ? 48   : 96
       const maxW  = (containerRef.current.clientWidth - hPad) * scale
       fitLine(line1Ref.current, maxW, cap)

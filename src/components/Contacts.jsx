@@ -1,11 +1,28 @@
 import { useState } from 'react'
-import { GitFork, Link2, Mail, X, ArrowUpRight } from 'lucide-react'
+import { GitFork, Mail, ArrowUpRight, MessageCircle } from 'lucide-react'
+
+const WA_NUMBER = '22966765173'
+const EMAIL = 'doloresvlafonou2000@gmail.com'
 
 const socialLinks = [
-  { icon: GitFork, label: 'GitHub',   href: '#' },
-  { icon: Link2,   label: 'LinkedIn', href: '#' },
-  { icon: Mail,    label: 'Email',    href: 'mailto:dolores@example.com' },
-  { icon: X,       label: 'Twitter',  href: '#' },
+  {
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    href: `https://wa.me/${WA_NUMBER}`,
+    target: '_blank',
+  },
+  {
+    icon: Mail,
+    label: 'Email',
+    href: `mailto:${EMAIL}`,
+    target: '_self',
+  },
+  {
+    icon: GitFork,
+    label: 'GitHub',
+    href: 'https://github.com/Miss-Dolores',
+    target: '_blank',
+  },
 ]
 
 const inputBase = {
@@ -24,15 +41,16 @@ const inputBase = {
 
 export default function Contacts() {
   const [form, setForm]   = useState({ name: '', email: '', message: '' })
-  const [sent, setSent]   = useState(false)
   const [focus, setFocus] = useState(null)
 
   const handleChange = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }))
+
   const handleSubmit = e => {
     e.preventDefault()
-    setSent(true)
+    const text = `Bonjour Dolores ! 👋\n\nNom : ${form.name}\nEmail : ${form.email}\n\nMessage :\n${form.message}`
+    const encoded = encodeURIComponent(text)
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encoded}`, '_blank')
     setForm({ name: '', email: '', message: '' })
-    setTimeout(() => setSent(false), 4000)
   }
 
   const fieldStyle = name => ({
@@ -113,7 +131,7 @@ export default function Contacts() {
             </p>
 
             <a
-              href="mailto:dolores@example.com"
+              href={`mailto:${EMAIL}`}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -128,16 +146,18 @@ export default function Contacts() {
                 transition: 'color 0.25s, border-color 0.25s',
               }}
               onMouseEnter={e => { e.currentTarget.style.color = '#22c55e'; e.currentTarget.style.borderBottomColor = '#22c55e' }}
-              onMouseLeave={e => { e.currentTarget.style.color = '#e8e4dc'; e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.15)' }}
+              onMouseLeave={e => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.15)' }}
             >
-              dolores@example.com <ArrowUpRight size={16} />
+              {EMAIL} <ArrowUpRight size={16} />
             </a>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-              {socialLinks.map(({ icon: Icon, label, href }) => (
+              {socialLinks.map(({ icon: Icon, label, href, target }) => (
                 <a
                   key={label}
                   href={href}
+                  target={target}
+                  rel="noopener noreferrer"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -249,18 +269,18 @@ export default function Contacts() {
                   fontSize: '0.78rem',
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
-                  color: sent ? '#22c55e' : '#0a0f0a',
-                  background: sent ? 'transparent' : '#22c55e',
+                  color: '#0a0f0a',
+                  background: '#22c55e',
                   border: '1px solid #22c55e',
                   padding: '14px 32px',
                   cursor: 'pointer',
                   transition: 'background 0.3s, color 0.3s',
                 }}
-                onMouseEnter={e => { if (!sent) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#22c55e' } }}
-                onMouseLeave={e => { if (!sent) { e.currentTarget.style.background = '#22c55e'; e.currentTarget.style.color = '#0a0f0a' } }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#22c55e' }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#22c55e'; e.currentTarget.style.color = '#0a0f0a' }}
               >
-                <ArrowUpRight size={15} />
-                {sent ? 'Message envoyé !' : 'Envoyer'}
+                <MessageCircle size={15} />
+                Envoyer via WhatsApp
               </button>
             </div>
           </form>
