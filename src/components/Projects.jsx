@@ -24,13 +24,13 @@ const projects = [
   },
   {
     num: '03',
-    title: 'API REST Blog',
-    description: 'Backend complet pour une plateforme de blogging : authentification JWT, gestion CRUD, base de données PostgreSQL.',
-    tags: ['Node.js', 'JavaScript', 'Git'],
-    year: '2023',
-    image: null,
-    live: '#',
-    github: '#',
+    title: 'Solana Clone',
+    description: 'Reproduction fidèle du site officiel de Solana — design dark avec animations, sections statistiques et mise en page responsive.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    year: '2024',
+    image: '/solana.webp',
+    live: 'https://solana-dsdev.netlify.app/',
+    github: 'https://github.com/Miss-Dolores/solana',
   },
 ]
 
