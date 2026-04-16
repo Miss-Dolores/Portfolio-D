@@ -32,7 +32,7 @@ export default function Navbar({ onNavClick, activeSection }) {
         borderBottom: scrolled ? '1px solid rgba(34,197,94,0.12)' : 'none',
       }}
     >
-      <div className="max-w-6xl mx-auto px-6 py-5 md:py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 py-7 md:py-4 flex items-center justify-between">
 
         {/* Logo */}
         <button
