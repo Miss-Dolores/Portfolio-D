@@ -24,7 +24,7 @@ const projects = [
   },
   {
     num: '03',
-    title: 'Solana Clone',
+    title: 'Solana',
     description: 'Reproduction fidèle du site officiel de Solana — design dark avec animations, sections statistiques et mise en page responsive.',
     tags: ['HTML', 'CSS', 'JavaScript'],
     year: '2024',
