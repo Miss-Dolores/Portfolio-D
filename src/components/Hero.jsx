@@ -147,23 +147,45 @@ export default function Hero({ onContactClick }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
-          paddingTop: '44px',
+          paddingTop: '20px',
           flexWrap: 'wrap',
           gap: '24px',
         }}>
-          <p
-            className={`hero-subtitle${revealed ? ' revealed' : ''}`}
-            style={{
-              fontFamily: 'var(--font-space)',
-              color: 'rgba(255,255,255,0.55)',
-              maxWidth: '380px',
-              fontSize: '0.88rem',
-              lineHeight: 1.7,
-              margin: 0,
-            }}
-          >
-            Je crée des interfaces modernes, fluides et centrées sur l'expérience utilisateur.
-          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start' }}>
+            <p
+              className={`hero-subtitle${revealed ? ' revealed' : ''}`}
+              style={{
+                fontFamily: 'var(--font-space)',
+                color: 'rgba(255,255,255,0.55)',
+                maxWidth: '380px',
+                fontSize: '0.88rem',
+                lineHeight: 1.7,
+                margin: 0,
+              }}
+            >
+              Je crée des interfaces modernes, fluides et centrées sur l'expérience utilisateur.
+            </p>
+            <button
+              className={`hero-subtitle md:hidden${revealed ? ' revealed' : ''}`}
+              onClick={onContactClick}
+              style={{
+                fontFamily: 'var(--font-space)',
+                fontSize: '0.75rem',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#000',
+                background: '#22c55e',
+                border: 'none',
+                borderRadius: '999px',
+                padding: '12px 28px',
+                cursor: 'pointer',
+                fontWeight: 600,
+                animationDelay: '0.7s',
+              }}
+            >
+              Me contacter
+            </button>
+          </div>
 
           <div
             className={`hero-badges${revealed ? ' revealed' : ''}`}
