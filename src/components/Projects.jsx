@@ -32,6 +32,16 @@ const projects = [
     live: 'https://solana-dsdev.netlify.app/',
     github: 'https://github.com/Miss-Dolores/solana',
   },
+  {
+    num: '04',
+    title: 'Assiba Market',
+    description: 'Site vitrine pour une superette bio locale — catalogue produits, design coloré et navigation simple pour mettre en valeur les produits du marché.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    year: '2024',
+    image: '/assiba.webp',
+    live: 'https://examdolores.netlify.app/',
+    github: 'https://github.com/Miss-Dolores/Examen',
+  },
 ]
 
 function ProjectRow({ project, delay }) {
