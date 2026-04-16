@@ -5,9 +5,10 @@ import WhatIBuild from './components/WhatIBuild'
 import WhyMe from './components/WhyMe'
 import About from './components/About'
 import Projects from './components/Projects'
-import FAQ from './components/FAQ'
 import Skills from './components/Skills'
 import Contacts from './components/Contacts'
+import FAQ from './components/FAQ'
+import Footer from './components/Footer'
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero')
@@ -57,9 +58,10 @@ export default function App() {
         <About />
         <Projects />
         <Skills />
-        <FAQ />
         <Contacts />
+        <FAQ />
       </div>
+      <Footer />
     </div>
   )
 }

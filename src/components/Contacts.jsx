@@ -286,25 +286,6 @@ export default function Contacts() {
           </form>
         </div>
 
-        {/* footer */}
-        <div style={{
-          borderTop: '1px solid rgba(255,255,255,0.07)',
-          marginTop: '100px',
-          paddingTop: '28px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '12px',
-        }}>
-          <span style={{ fontFamily: 'var(--font-space)', fontSize: '0.72rem', color: '#333', letterSpacing: '0.08em' }}>
-            © 2025 Dolores Vlafonou
-          </span>
-          <span style={{ fontFamily: 'var(--font-space)', fontSize: '0.72rem', color: '#333', letterSpacing: '0.08em' }}>
-            Conçu & développé avec soin
-          </span>
-        </div>
-
       </div>
     </section>
   )
