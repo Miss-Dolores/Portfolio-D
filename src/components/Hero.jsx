@@ -64,12 +64,27 @@ export default function Hero({ onContactClick }) {
   return (
     <section
       id="hero"
-      style={{ background: '#000000', position: 'relative', overflow: 'hidden' }}
+      style={{
+        background: '#000000',
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundImage: 'url(/hero-bg.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
     >
+      {/* dark overlay to keep text readable */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'rgba(0,0,0,0.72)',
+        zIndex: 0,
+      }} />
       <div
         ref={containerRef}
         className="hero-container"
-        style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}
+        style={{ position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}
       >
         {/* role label */}
         <div style={{
