@@ -37,29 +37,48 @@ export default function Navbar({ onNavClick, activeSection }) {
         {/* Logo */}
         <button
           onClick={() => handleClick('#hero')}
-          style={{
-            fontFamily: 'var(--font-jevena)',
-            color: '#22c55e',
-            letterSpacing: '0.08em',
-            fontSize: '1.15rem',
-            fontWeight: 700,
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}
+          aria-label="Retour à l'accueil"
         >
-          <span style={{
-            display: 'inline-block',
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            background: '#22c55e',
-            boxShadow: '0 0 8px #22c55e',
-          }} />
-          DS Dev
+          <svg width="62" height="36" viewBox="0 0 62 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="60" height="34" rx="4" stroke="#22c55e" strokeWidth="1.5" fill="none" />
+            <text
+              x="8"
+              y="24"
+              fontFamily="'Josefin Sans', sans-serif"
+              fontWeight="700"
+              fontSize="18"
+              fill="#22c55e"
+              letterSpacing="0.5"
+            >
+              DS
+            </text>
+            <line x1="37" y1="8" x2="37" y2="28" stroke="#22c55e" strokeWidth="1" strokeOpacity="0.35" />
+            <text
+              x="41"
+              y="16"
+              fontFamily="'Josefin Sans', sans-serif"
+              fontWeight="400"
+              fontSize="7"
+              fill="#22c55e"
+              fillOpacity="0.6"
+              letterSpacing="1.5"
+            >
+              DEV
+            </text>
+            <text
+              x="41"
+              y="26"
+              fontFamily="'Josefin Sans', sans-serif"
+              fontWeight="300"
+              fontSize="6"
+              fill="#22c55e"
+              fillOpacity="0.4"
+              letterSpacing="0.5"
+            >
+              STUDIO
+            </text>
+          </svg>
         </button>
 
         {/* Desktop pill nav */}
