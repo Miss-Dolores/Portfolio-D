@@ -39,7 +39,8 @@ body {
   padding: 120px 48px 56px;
 }
 @media (max-width: 640px) {
-  .hero-container { padding: 100px 24px 48px; }
+  .hero-container { padding: 96px 24px 40px; }
+  .hero-name-wrapper { flex: 0 !important; margin: 12px 0 10px !important; justify-content: flex-start !important; }
 }
 
 /* ── Hero animations ─────────────────────────────── */

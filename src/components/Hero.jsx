@@ -100,6 +100,7 @@ export default function Hero({ onContactClick }) {
 
         {/* massive name */}
         <div
+          className="hero-name-wrapper"
           style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
