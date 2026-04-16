@@ -80,7 +80,7 @@ export default function Hero({ onContactClick }) {
           textTransform: 'uppercase',
           marginBottom: '28px',
         }}>
-          Développeur Web Full-Stack
+          Développeur Full-Stack & Designer UI/UX
         </div>
 
         {/* massive name */}

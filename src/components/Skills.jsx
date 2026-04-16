@@ -63,11 +63,20 @@ const logos = {
       <path fillRule="evenodd" clipRule="evenodd" d="M16 2C8.3 2 2 8.3 2 16c0 6.2 4 11.4 9.6 13.2.7.1 1-.3 1-.7v-2.4c-3.9.8-4.7-1.9-4.7-1.9-.6-1.6-1.5-2-1.5-2-1.2-.8.1-.8.1-.8 1.4.1 2.1 1.4 2.1 1.4 1.2 2.1 3.2 1.5 4 1.1.1-.9.5-1.5.9-1.8-3.1-.4-6.4-1.6-6.4-7 0-1.5.5-2.8 1.4-3.8-.1-.4-.6-1.8.1-3.7 0 0 1.2-.4 3.8 1.4a13.4 13.4 0 017 0c2.6-1.8 3.8-1.4 3.8-1.4.7 1.9.3 3.3.1 3.7.9 1 1.4 2.3 1.4 3.8 0 5.4-3.3 6.6-6.4 7 .5.4 1 1.3 1 2.6v3.9c0 .4.2.8 1 .7C26 27.4 30 22.2 30 16c0-7.7-6.3-14-14-14z" fill="#fff"/>
     </svg>
   ),
+  Figma: (
+    <svg viewBox="0 0 32 32" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 30a5 5 0 005-5v-5h-5a5 5 0 000 10z" fill="#0acf83"/>
+      <path d="M5 15a5 5 0 015-5h5v10h-5a5 5 0 01-5-5z" fill="#a259ff"/>
+      <path d="M5 5a5 5 0 015-5h5v10h-5A5 5 0 015 5z" fill="#f24e1e"/>
+      <path d="M15 0h5a5 5 0 010 10h-5V0z" fill="#ff7262"/>
+      <path d="M25 15a5 5 0 11-10 0 5 5 0 0110 0z" fill="#1abcfe"/>
+    </svg>
+  ),
 }
 
 const allSkills = [
   'CSS', 'Node.js', 'React', 'HTML', 'JavaScript',
-  'Tailwind CSS', 'Git', 'Vite', 'Netlify', 'GitHub',
+  'Tailwind CSS', 'Git', 'Vite', 'Netlify', 'GitHub', 'Figma',
 ]
 
 const row1 = allSkills.slice(0, 5)
@@ -160,7 +169,7 @@ export default function Skills() {
             fontSize: '0.8rem',
             letterSpacing: '0.05em',
           }}>
-            10 technologies
+            11 technologies
           </p>
         </div>
       </div>

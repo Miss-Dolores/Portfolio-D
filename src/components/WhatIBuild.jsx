@@ -8,9 +8,15 @@ import {
   Briefcase,
   Globe,
   Layers,
+  Palette,
 } from 'lucide-react'
 
 const siteTypes = [
+  {
+    icon: Palette,
+    label: 'Design UI/UX',
+    desc: 'Interfaces intuitives et esthétiques conçues sur Figma — maquettes, prototypes et systèmes de design.',
+  },
   {
     icon: Monitor,
     label: 'Site Vitrine',
