@@ -25,7 +25,7 @@ const reasons = [
   {
     icon: Lightbulb,
     title: 'Approche créative',
-    desc: 'Je ne me contente pas d\'exécuter — j\'apporte des idées, des suggestions et une vision pour améliorer votre produit.',
+    desc: 'Je ne me contente pas d\'exécuter, j\'apporte des idées, des suggestions et une vision pour améliorer votre produit.',
   },
   {
     icon: HeartHandshake,

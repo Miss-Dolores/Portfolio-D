@@ -11,13 +11,13 @@ const expertise = [
     label: 'Back-end',
     title: 'Développeur back-end',
     text: 'Spécialisé dans la logique serveur et la gestion des bases de données, je conçois des APIs robustes pour assurer le bon fonctionnement des applications web.',
-    stack: ['Node.js', 'REST API', 'PostgreSQL', 'Git'],
+    stack: ['Node.js', 'REST API', 'Git'],
   },
   {
     label: 'Design',
     title: 'Designer UI/UX',
     text: 'Je conçois des interfaces centrées sur l\'utilisateur — maquettes Figma, prototypes interactifs et systèmes de design cohérents. J\'accorde autant d\'importance à l\'esthétique qu\'à l\'ergonomie pour créer des expériences mémorables.',
-    stack: ['Figma', 'Prototypage', 'UX Research', 'Design System'],
+    stack: ['Figma', 'UX Research', 'Design System'],
   },
 ]
 
@@ -142,7 +142,7 @@ export default function About() {
             }}>
               Passionné par la création d'expériences numériques modernes et performantes. 
               Je combine maîtrise technique et sensibilité design pour livrer des produits 
-              qui font la différence — du concept à la mise en production.{' '}
+              qui font la différence du concept à la mise en production.{' '}
               Que ce soit une interface utilisateur soignée ou une API robuste côté serveur, j'apporte le même niveau d'exigence à chaque ligne de code.{' '}
               Mon ambition : construire des solutions qui durent et qui impressionnent.
             </p>
